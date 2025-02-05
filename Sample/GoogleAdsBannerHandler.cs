@@ -2,10 +2,10 @@ using Microsoft.Maui;
 using Microsoft.Maui.Handlers;
 
 #if IOS
-using NativeBannerAdView = GoogleMobileAds.GADBannerView;
+using NativeBannerAdView = Maui.MobileAds.GADBannerView;
 using Foundation;
 using UIKit;
-using GoogleMobileAds;
+using Maui.MobileAds;
 #else
 using NativeBannerAdView = object;
 #endif
@@ -34,8 +34,8 @@ public partial class GoogleAdsBannerHandler : ViewHandler<IGoogleAdsBannerView, 
         // GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth or
         // GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth if you prefer to load an ad of a
         // particular orientation,
-        var adaptiveSize = GoogleMobileAds.AdSize.GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth);
-        var bannerView = new GoogleMobileAds.GADBannerView(adaptiveSize);
+        var adaptiveSize = AdSize.GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth);
+        var bannerView = new GADBannerView(adaptiveSize);
         bannerView.Delegate = new BannerDg();
         return bannerView;
 #else
@@ -48,10 +48,10 @@ public partial class GoogleAdsBannerHandler : ViewHandler<IGoogleAdsBannerView, 
         base.ConnectHandler(platformView);
         
         #if IOS
-        platformView.AdUnitID = "ca-app-pub-3940256099942544/2435281174";
+        platformView.AdUnitID = "ca-app-pub-3940256099942544/2934735716";
         platformView.RootViewController = this.ViewController;
 
-        platformView.LoadRequest(new GoogleMobileAds.GADRequest());
+        platformView.LoadRequest(new GADRequest());
 #endif
     }
 }
@@ -61,7 +61,7 @@ public partial class GoogleAdsBannerView : View, IGoogleAdsBannerView
 }
 
 #if IOS
-public class BannerDg : GoogleMobileAds.GADBannerViewDelegate
+public class BannerDg : GADBannerViewDelegate
 {
    public override void BannerViewDidFailToReceiveAd(GADBannerView bannerView, NSError error)
 	{

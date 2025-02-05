@@ -1,6 +1,6 @@
 param (
-	[String]$MobileAdsVersion = '11.2.0',
-	[String]$UserMessagingPlatformVersion = '2.3.0',
+	[String]$MobileAdsVersion = '11.13.0',
+	[String]$UserMessagingPlatformVersion = '2.7.0',
 	[String]$BuildPath = '.build/',
 	[Bool]$BuildNuGet = $true,
 	[Bool]$GenerateBindings = $false,
@@ -8,10 +8,9 @@ param (
 	[Bool]$IsRelease = $false
 )
 
-
 Function DownloadGoogleMobileAdsSdks(
-	[String]$MobileAdsVersion = '11.2.0',
-	[String]$UserMessagingPlatformVersion = '2.3.0',
+	[String]$MobileAdsVersion = '11.13.0',
+	[String]$UserMessagingPlatformVersion = '2.7.0',
 	[String]$DownloadPath = '.build/'
 ){
 	# Get the download URL's for the Google Mobile Ads SDK tar.gz
@@ -48,7 +47,7 @@ Remove-Item -Recurse -Force -Path $BuildPath -ErrorAction SilentlyContinue
 
 DownloadGoogleMobileAdsSdks -MobileAdsVersion $MobileAdsVersion -UserMessagingPlatformVersion $UserMessagingPlatformVersion -DownloadPath $BuildPath
 
-if ($BuildNuGet -eq $True) {
+if ($BuildNuGet -eq $true) {
 
 	if ($IsRelease -eq $true) {
 		$NuGetMobileAdsVersion = "$MobileAdsVersion.$BuildNumber"
@@ -61,14 +60,14 @@ if ($BuildNuGet -eq $True) {
 	$NuGetOutputPath = (Join-Path $BuildPath "NuGet")
 	New-Item -ItemType Directory -Force -Path $NuGetOutputPath -ErrorAction SilentlyContinue
 
-	dotnet build -t:Pack -c:Release -p:PackageVersion=$NuGetMobileAdsVersion -p:PackageOutputPath=$NuGetOutputPath ./GoogleMobileAds.iOS.Binding/GoogleMobileAds.iOS.Binding.csproj
-	dotnet build -t:Pack -c:Release -p:PackageVersion=$NuGetUserMessagingPlatformVersion -p:PackageOutputPath=$NuGetOutputPath ./UserMessagingPlatform.iOS.Binding/UserMessagingPlatform.iOS.Binding.csproj
+	dotnet build -t:Pack -c:Release -p:PackageVersion=$NuGetMobileAdsVersion -p:PackageOutputPath=$NuGetOutputPath ./MobileAds/MobileAds.csproj
+	dotnet build -t:Pack -c:Release -p:PackageVersion=$NuGetUserMessagingPlatformVersion -p:PackageOutputPath=$NuGetOutputPath ./UserMessagingPlatform/UserMessagingPlatform.csproj
 }
 
-if ($GenerateBindings -eq $True) {
+if ($GenerateBindings -eq $true) {
 	$BindingOutputPath = (Join-Path $BuildPath "Bindings")
 	New-Item -ItemType Directory -Force -Path $BindingOutputPath -ErrorAction SilentlyContinue
 
-	& sharpie bind --sdk=iphoneos17.2 --output (Join-Path $BindingOutputPath "UserMessagingPlatform/") --namespace=UserMessagingPlatform --framework (Join-Path $BuildPath "GoogleUserMessagingPlatform/Frameworks/Release/UserMessagingPlatform.xcframework/ios-arm64/UserMessagingPlatform.framework")
-	& sharpie bind --sdk=iphoneos17.2 --output (Join-Path $BindingOutputPath "GoogleMobileAds/") --namespace=GoogleMobileAds --framework (Join-Path $BuildPath "GoogleMobileAds/Frameworks/GoogleMobileAdsFramework/GoogleMobileAds.xcframework/ios-arm64/GoogleMobileAds.framework")
+	& sharpie bind --sdk=iphoneos17.4 --output (Join-Path $BindingOutputPath "UserMessagingPlatform/") --namespace=UserMessagingPlatform --framework (Join-Path $BuildPath "GoogleUserMessagingPlatform/Frameworks/Release/UserMessagingPlatform.xcframework/ios-arm64/UserMessagingPlatform.framework")
+	& sharpie bind --sdk=iphoneos17.4 --output (Join-Path $BindingOutputPath "MobileAds/") --namespace=GoogleMobileAds --framework (Join-Path $BuildPath "GoogleMobileAds/Frameworks/GoogleMobileAdsFramework/GoogleMobileAds.xcframework/ios-arm64/GoogleMobileAds.framework")
 }

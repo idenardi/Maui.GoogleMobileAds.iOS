@@ -1,9 +1,8 @@
 using Foundation;
 using ObjCRuntime;
 using UIKit;
-using UserMessagingPlatform;
 
-namespace UserMessagingPlatform
+namespace Maui.UserMessagingPlatform
 {
 	// @interface UMPDebugSettings : NSObject <NSCopying>
 	[BaseType (typeof(NSObject))]

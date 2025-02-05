@@ -1,13 +1,15 @@
 using ObjCRuntime;
 
-namespace UserMessagingPlatform
+namespace Maui.UserMessagingPlatform
 {
     [Native]
     public enum UMPDebugGeography : long
     {
         Disabled = 0,
         Eea = 1,
-        NotEEA = 2
+        NotEEA = 2,
+        RegulatedUSState = 3,
+		Other = 4
     }
 
     [Native]

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net8.0-ios</TargetFramework>
+        <TargetFramework>net9.0-ios</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>true</ImplicitUsings>
         <IsBindingProject>true</IsBindingProject>
@@ -8,27 +8,27 @@
 
     <ItemGroup>
         <!-- Linker flags, Frameworks, WeakFrameworks, etc can be found in the podspec -->
-        <!-- eg: https://github.com/CocoaPods/Specs/blob/master/Specs/5/9/a/Google-Mobile-Ads-SDK/11.2.0/Google-Mobile-Ads-SDK.podspec.json -->
+        <!-- eg: https://github.com/CocoaPods/Specs/blob/master/Specs/5/9/a/Google-Mobile-Ads-SDK/11.13.0/Google-Mobile-Ads-SDK.podspec.json -->
         <NativeReference Include="../.build/GoogleMobileAds/Frameworks/GoogleMobileAdsFramework/GoogleMobileAds.xcframework">
             <Kind>Static</Kind>
             <SmartLink>True</SmartLink>
             <ForceLoad>True</ForceLoad>
             <LinkerFlags>-ObjC -lsqlite3 -lz</LinkerFlags>
-            <Frameworks>AudioToolbox AVFoundation CFNetwork CoreGraphics CoreMedia CoreTelephony CoreVideo MediaPlayer MessageUI MobileCoreServices QuartzCore Security StoreKit SystemConfiguration</Frameworks>
+            <Frameworks>AudioToolbox AVFoundation CFNetwork CoreGraphics CoreMedia CoreTelephony CoreVideo JavaScriptCore MediaPlayer MessageUI MobileCoreServices Network QuartzCore Security StoreKit SystemConfiguration</Frameworks>
             <WeakFrameworks>AdSupport JavaScriptCore SafariServices WebKit</WeakFrameworks>
         </NativeReference>
     </ItemGroup>
 
     <PropertyGroup>
-        <PackageId>GoogleMobileAds.iOS.Binding</PackageId>
+        <PackageId>Maui.GAD</PackageId>
     </PropertyGroup>
 
     <ItemGroup>
-        <ObjcBindingApiDefinition Include="ApiDefinition.cs"/>
-        <ObjcBindingCoreSource Include="StructsAndEnums.cs"/>
+        <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+        <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\UserMessagingPlatform.iOS.Binding\UserMessagingPlatform.iOS.Binding.csproj" />
+      <ProjectReference Include="../UserMessagingPlatform.iOS.Binding/UserMessagingPlatform.csproj" />
     </ItemGroup>
 </Project>

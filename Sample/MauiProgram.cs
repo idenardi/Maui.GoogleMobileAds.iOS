@@ -24,13 +24,6 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-
-        var instance = GoogleMobileAds.GADMobileAds.SharedInstance;
-        
-        instance.StartWithCompletionHandler(status => {
-
-        });
-
         return builder.Build();
     }
 }

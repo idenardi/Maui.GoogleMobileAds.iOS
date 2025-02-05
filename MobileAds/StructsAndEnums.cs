@@ -2,10 +2,9 @@ using System;
 using System.Runtime.InteropServices;
 using CoreGraphics;
 using Foundation;
-using GoogleMobileAds;
 using ObjCRuntime;
 
-namespace GoogleMobileAds
+namespace Maui.MobileAds
 {
 	[Native]
 	public enum GADAdChoicesPosition : long
