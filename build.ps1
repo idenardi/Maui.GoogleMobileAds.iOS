@@ -1,6 +1,6 @@
 param (
-	[String]$MobileAdsVersion = '11.13.0',
-	[String]$UserMessagingPlatformVersion = '2.7.0',
+	[String]$MobileAdsVersion = '12.7.0',
+	[String]$UserMessagingPlatformVersion = '3.0.0',
 	[String]$BuildPath = '.build/',
 	[Bool]$BuildNuGet = $true,
 	[Bool]$GenerateBindings = $false,
@@ -9,8 +9,8 @@ param (
 )
 
 Function DownloadGoogleMobileAdsSdks(
-	[String]$MobileAdsVersion = '11.13.0',
-	[String]$UserMessagingPlatformVersion = '2.7.0',
+	[String]$MobileAdsVersion = '12.7.0',
+	[String]$UserMessagingPlatformVersion = '3.0.0',
 	[String]$DownloadPath = '.build/'
 ){
 	# Get the download URL's for the Google Mobile Ads SDK tar.gz
@@ -68,6 +68,6 @@ if ($GenerateBindings -eq $true) {
 	$BindingOutputPath = (Join-Path $BuildPath "Bindings")
 	New-Item -ItemType Directory -Force -Path $BindingOutputPath -ErrorAction SilentlyContinue
 
-	& sharpie bind --sdk=iphoneos17.4 --output (Join-Path $BindingOutputPath "UserMessagingPlatform/") --namespace=UserMessagingPlatform --framework (Join-Path $BuildPath "GoogleUserMessagingPlatform/Frameworks/Release/UserMessagingPlatform.xcframework/ios-arm64/UserMessagingPlatform.framework")
-	& sharpie bind --sdk=iphoneos17.4 --output (Join-Path $BindingOutputPath "MobileAds/") --namespace=GoogleMobileAds --framework (Join-Path $BuildPath "GoogleMobileAds/Frameworks/GoogleMobileAdsFramework/GoogleMobileAds.xcframework/ios-arm64/GoogleMobileAds.framework")
+	& sharpie bind --sdk=iphoneos18.0 --output (Join-Path $BindingOutputPath "UserMessagingPlatform/") --namespace=UserMessagingPlatform --framework (Join-Path $BuildPath "GoogleUserMessagingPlatform/Frameworks/Release/UserMessagingPlatform.xcframework/ios-arm64/UserMessagingPlatform.framework")
+	& sharpie bind --sdk=iphoneos18.0 --output (Join-Path $BindingOutputPath "MobileAds/") --namespace=GoogleMobileAds --framework (Join-Path $BuildPath "GoogleMobileAds/Frameworks/GoogleMobileAdsFramework/GoogleMobileAds.xcframework/ios-arm64/GoogleMobileAds.framework")
 }

@@ -10,7 +10,7 @@ namespace Maui.MobileAds
 	[Static]
 	partial interface Constants
 	{
-		// extern const unsigned char[] GoogleMobileAdsVersionString;
+		// extern const unsigned char[] GoogleMobileAdsVersionString __attribute__((swift_name("GoogleMobileAdsVersion")));
 		[Field("GoogleMobileAdsVersionString", "__Internal")]
 		NSString GoogleMobileAdsVersionString { get; }
 
@@ -18,7 +18,7 @@ namespace Maui.MobileAds
 		[Field("GADAdLoaderAdTypeCustomNative", "__Internal")]
 		NSString GADAdLoaderAdTypeCustomNative { get; }
 
-		// extern GADAdLoaderAdType  _Nonnull const GADAdLoaderAdTypeGAMBanner;
+		// extern NS_SWIFT_NAME(adManagerBanner) GADAdLoaderAdType GADAdLoaderAdTypeGAMBanner __attribute__((swift_name("adManagerBanner")));
 		[Field("GADAdLoaderAdTypeGAMBanner", "__Internal")]
 		NSString GADAdLoaderAdTypeGAMBanner { get; }
 
@@ -93,7 +93,7 @@ namespace Maui.MobileAds
 		// extern NSString *const _Nonnull GADCustomEventParametersServer;
 		[Field("GADCustomEventParametersServer", "__Internal")]
 		NSString GADCustomEventParametersServer { get; }
-
+		
 		// extern NSString *const _Nonnull GADCustomNativeAdMediaViewKey;
 		[Field("GADCustomNativeAdMediaViewKey", "__Internal")]
 		NSString GADCustomNativeAdMediaViewKey { get; }
@@ -158,7 +158,7 @@ namespace Maui.MobileAds
 		[Export("removeAdNetworkExtrasFor:")]
 		void RemoveAdNetworkExtrasFor(GADAdNetworkExtras aClass);
 
-		// @property (nonatomic, weak) API_AVAILABLE(ios(13.0)) UIWindowScene * scene __attribute__((availability(ios, introduced=13.0)));
+		// @property (nonatomic, weak) API_AVAILABLE(ios(13.0)) UIWindowScene * scene __attribute__((availability (ios, introduced=13.0)));
 		[System.Runtime.Versioning.SupportedOSPlatform("ios13.0")]
 		[Export("scene", ArgumentSemantic.Weak)]
 		UIWindowScene Scene { get; set; }
@@ -168,50 +168,54 @@ namespace Maui.MobileAds
 		string[] Keywords { get; set; }
 
 		// @property (copy, nonatomic) NSString * _Nullable contentURL;
-		[NullAllowed, Export("contentURL")] 
+		[NullAllowed, Export("contentURL")]
 		string ContentURL { get; set; }
 
-		// @property (copy, nonatomic) NSArray<NSString *> * _Nullable neighboringContentURLStrings;
-		[NullAllowed, Export("neighboringContentURLStrings", ArgumentSemantic.Copy)]
+		// @property (copy, nonatomic) NS_SWIFT_NAME(neighboringContentURLs) NSArray<NSString *> * neighboringContentURLStrings __attribute__((swift_name("neighboringContentURLs")));
+		[Export("neighboringContentURLStrings", ArgumentSemantic.Copy)]
 		string[] NeighboringContentURLStrings { get; set; }
 
+		// @property (readwrite, atomic) int64_t placementID;
+		[Export("placementID")]
+		long PlacementID { get; set; }
+
 		// @property (copy, nonatomic) NSString * _Nullable requestAgent;
-		[NullAllowed, Export("requestAgent")] 
+		[NullAllowed, Export("requestAgent")]
 		string RequestAgent { get; set; }
 
-		// @property (copy, nonatomic) NSDictionary<NSString *,NSString *> * _Nullable customTargeting;
-		[NullAllowed, Export ("customTargeting", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSString> CustomTargeting { get; set; }
+		// @property (copy, nonatomic) NSDictionary<NSString *,id> * _Nullable customTargeting;
+		[NullAllowed, Export("customTargeting", ArgumentSemantic.Copy)]
+		NSDictionary<NSString, NSObject> CustomTargeting { get; set; }
 
-		// extern const GADAdSize GADAdSizeBanner;
+		// extern const GADAdSize GADAdSizeBanner __attribute__((swift_name("AdSizeBanner")));
 		[Field("GADAdSizeBanner", "__Internal")]
 		IntPtr GADAdSizeBanner { get; }
 
-		// extern const GADAdSize GADAdSizeLargeBanner;
+		// extern const GADAdSize GADAdSizeLargeBanner __attribute__((swift_name("AdSizeLargeBanner")));
 		[Field("GADAdSizeLargeBanner", "__Internal")]
 		IntPtr GADAdSizeLargeBanner { get; }
 
-		// extern const GADAdSize GADAdSizeMediumRectangle;
+		// extern const GADAdSize GADAdSizeMediumRectangle __attribute__((swift_name("AdSizeMediumRectangle")));
 		[Field("GADAdSizeMediumRectangle", "__Internal")]
 		IntPtr GADAdSizeMediumRectangle { get; }
 
-		// extern const GADAdSize GADAdSizeFullBanner;
+		// extern const GADAdSize GADAdSizeFullBanner __attribute__((swift_name("AdSizeFullBanner")));
 		[Field("GADAdSizeFullBanner", "__Internal")]
 		IntPtr GADAdSizeFullBanner { get; }
 
-		// extern const GADAdSize GADAdSizeLeaderboard;
+		// extern const GADAdSize GADAdSizeLeaderboard __attribute__((swift_name("AdSizeLeaderboard")));
 		[Field("GADAdSizeLeaderboard", "__Internal")]
 		IntPtr GADAdSizeLeaderboard { get; }
 
-		// extern const GADAdSize GADAdSizeSkyscraper;
+		// extern const GADAdSize GADAdSizeSkyscraper __attribute__((swift_name("AdSizeSkyscraper")));
 		[Field("GADAdSizeSkyscraper", "__Internal")]
 		IntPtr GADAdSizeSkyscraper { get; }
 
-		// extern const GADAdSize GADAdSizeFluid;
+		// extern const GADAdSize GADAdSizeFluid __attribute__((swift_name("AdSizeFluid")));
 		[Field("GADAdSizeFluid", "__Internal")]
 		IntPtr GADAdSizeFluid { get; }
 
-		// extern const GADAdSize GADAdSizeInvalid;
+		// extern const GADAdSize GADAdSizeInvalid __attribute__((swift_name("AdSizeInvalid")));
 		[Field("GADAdSizeInvalid", "__Internal")]
 		IntPtr GADAdSizeInvalid { get; }
 
@@ -231,18 +235,14 @@ namespace Maui.MobileAds
 		[Field("GADMaxAdContentRatingMatureAudience", "__Internal")]
 		NSString GADMaxAdContentRatingMatureAudience { get; }
 
-		// extern GAD_DEPRECATED_MSG_ATTRIBUTE("Deprecated. Simulators are already in test mode by default.") NSString *const GADSimulatorID __attribute__((deprecated("Deprecated. Simulators are already in test mode by default.")));
-		[Field("GADSimulatorID", "__Internal")]
-		NSString GADSimulatorID { get; }
-
-		// extern NSString *const _Nonnull GADErrorDomain;
+		// extern NSErrorDomain  _Nonnull const GADErrorDomain;
 		[Field("GADErrorDomain", "__Internal")]
 		NSString GADErrorDomain { get; }
 
-		// From Category GADRequest_AdString IGADMAdNetworkConnector
-		// @property (copy, nonatomic) NSString * _Nullable adString;
-		[NullAllowed, Export("adString")] 
-		string AdString { get; set; }
+		// From Category GADRequest_AdString
+		// @property (copy, nonatomic) GAD_DEPRECATED_MSG_ATTRIBUTE("Use each ad format class's loadWithAdResponseString: instead.") NSString * adString __attribute__((deprecated("Use each ad format class's loadWithAdResponseString: instead.")));
+		[Export("adString")]
+		string AdString { get; set; }	
 	}
 
 	// @interface GADAdLoaderOptions : NSObject
@@ -256,7 +256,7 @@ namespace Maui.MobileAds
 	interface GADAdLoader
 	{
 		[Wrap("WeakDelegate")]
-		[NullAllowed] 
+		[NullAllowed]
 		GADAdLoaderDelegate Delegate { get; set; }
 
 		// @property (nonatomic, weak) id<GADAdLoaderDelegate> _Nullable delegate;
@@ -264,21 +264,29 @@ namespace Maui.MobileAds
 		NSObject WeakDelegate { get; set; }
 
 		// @property (readonly, nonatomic) NSString * _Nonnull adUnitID;
-		[Export("adUnitID")] 
+		[Export("adUnitID")]
 		string AdUnitID { get; }
 
-		// @property (readonly, getter = isLoading, nonatomic) BOOL loading;
-		[Export("loading")] 
+		// @property (readonly, getter = isLoading, nonatomic) BOOL loading __attribute__((swift_name("isLoading")));
+		[Export("loading")]
 		bool Loading { [Bind("isLoading")] get; }
 
 		// -(instancetype _Nonnull)initWithAdUnitID:(NSString * _Nonnull)adUnitID rootViewController:(UIViewController * _Nullable)rootViewController adTypes:(NSArray<GADAdLoaderAdType> * _Nonnull)adTypes options:(NSArray<GADAdLoaderOptions *> * _Nullable)options;
 		[Export("initWithAdUnitID:rootViewController:adTypes:options:")]
-		NativeHandle Constructor(string adUnitID, [NullAllowed] UIViewController rootViewController, string[] adTypes,
-			[NullAllowed] GADAdLoaderOptions[] options);
+		NativeHandle Constructor(string adUnitID, [NullAllowed] UIViewController rootViewController, string[] adTypes, [NullAllowed] GADAdLoaderOptions[] options);
 
 		// -(void)loadRequest:(GADRequest * _Nullable)request;
 		[Export("loadRequest:")]
 		void LoadRequest([NullAllowed] GADRequest request);
+
+		// from category GADAdLoader_ServerToServer
+		// -(instancetype _Nonnull)initWithRootViewController:(UIViewController * _Nullable)rootViewController;
+		[Export("initWithRootViewController:")]
+		NativeHandle Constructor([NullAllowed] UIViewController rootViewController);
+
+		// -(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString __attribute__((swift_name("load(with:)")));
+		[Export("loadWithAdResponseString:")]
+		void LoadWithAdResponseString(string adResponseString);
 	}
 
 	// @protocol GADAdMetadataProvider <NSObject>
@@ -329,11 +337,11 @@ namespace Maui.MobileAds
 	interface GADAdReward
 	{
 		// @property (readonly, nonatomic) NSString * _Nonnull type;
-		[Export("type")] 
+		[Export("type")]
 		string Type { get; }
 
 		// @property (readonly, nonatomic) NSDecimalNumber * _Nonnull amount;
-		[Export("amount")] 
+		[Export("amount")]
 		NSDecimalNumber Amount { get; }
 
 		// -(instancetype _Nonnull)initWithRewardType:(NSString * _Nullable)rewardType rewardAmount:(NSDecimalNumber * _Nullable)rewardAmount __attribute__((objc_designated_initializer));
@@ -361,15 +369,15 @@ namespace Maui.MobileAds
 	interface GADAdValue : INSCopying
 	{
 		// @property (readonly, nonatomic) GADAdValuePrecision precision;
-		[Export("precision")] 
+		[Export("precision")]
 		GADAdValuePrecision Precision { get; }
 
 		// @property (readonly, nonatomic) NSDecimalNumber * _Nonnull value;
-		[Export("value")] 
+		[Export("value")]
 		NSDecimalNumber Value { get; }
 
 		// @property (readonly, nonatomic) NSString * _Nonnull currencyCode;
-		[Export("currencyCode")] 
+		[Export("currencyCode")]
 		string CurrencyCode { get; }
 	}
 
@@ -378,11 +386,11 @@ namespace Maui.MobileAds
 	[BaseType(typeof(NSObject))]
 	interface GADAppEventDelegate
 	{
-		// @optional -(void)adView:(GADBannerView * _Nonnull)banner didReceiveAppEvent:(NSString * _Nonnull)name withInfo:(NSString * _Nullable)info;
+		// @optional -(void)adView:(GADBannerView * _Nonnull)banner didReceiveAppEvent:(NSString * _Nonnull)name withInfo:(NSString * _Nullable)info __attribute__((swift_name("adView(_:didReceiveAppEvent:with:)")));
 		[Export("adView:didReceiveAppEvent:withInfo:")]
 		void AdViewDidReceiveAppEvent(GADBannerView banner, string name, [NullAllowed] string info);
 
-		// @optional -(void)interstitialAd:(GADInterstitialAd * _Nonnull)interstitialAd didReceiveAppEvent:(NSString * _Nonnull)name withInfo:(NSString * _Nullable)info;
+		// @optional -(void)interstitialAd:(GADInterstitialAd * _Nonnull)interstitialAd didReceiveAppEvent:(NSString * _Nonnull)name withInfo:(NSString * _Nullable)info __attribute__((swift_name("adView(_:didReceiveAppEvent:with:)")));
 		[Export("interstitialAd:didReceiveAppEvent:withInfo:")]
 		void InterstitialAdDidReceiveAppEvent(GADInterstitialAd interstitialAd, string name, [NullAllowed] string info);
 	}
@@ -416,27 +424,27 @@ namespace Maui.MobileAds
 	[BaseType(typeof(NSObject))]
 	interface GADFullScreenContentDelegate
 	{
-		// @optional -(void)adDidRecordImpression:(id<GADFullScreenPresentingAd> _Nonnull)ad;
+		// @optional -(void)adDidRecordImpression:(id<GADFullScreenPresentingAd> _Nonnull)ad __attribute__((swift_attr("@UIActor")));
 		[Export("adDidRecordImpression:")]
 		void AdDidRecordImpression(GADFullScreenPresentingAd ad);
 
-		// @optional -(void)adDidRecordClick:(id<GADFullScreenPresentingAd> _Nonnull)ad;
+		// @optional -(void)adDidRecordClick:(id<GADFullScreenPresentingAd> _Nonnull)ad __attribute__((swift_attr("@UIActor")));
 		[Export("adDidRecordClick:")]
 		void AdDidRecordClick(GADFullScreenPresentingAd ad);
 
-		// @optional -(void)ad:(id<GADFullScreenPresentingAd> _Nonnull)ad didFailToPresentFullScreenContentWithError:(NSError * _Nonnull)error;
+		// @optional -(void)ad:(id<GADFullScreenPresentingAd> _Nonnull)ad didFailToPresentFullScreenContentWithError:(NSError * _Nonnull)error __attribute__((swift_attr("@UIActor")));
 		[Export("ad:didFailToPresentFullScreenContentWithError:")]
 		void AdDidFailToPresentFullScreenContent(GADFullScreenPresentingAd ad, NSError error);
 
-		// @optional -(void)adWillPresentFullScreenContent:(id<GADFullScreenPresentingAd> _Nonnull)ad;
+		// @optional -(void)adWillPresentFullScreenContent:(id<GADFullScreenPresentingAd> _Nonnull)ad __attribute__((swift_attr("@UIActor")));
 		[Export("adWillPresentFullScreenContent:")]
 		void AdWillPresentFullScreenContent(GADFullScreenPresentingAd ad);
 
-		// @optional -(void)adWillDismissFullScreenContent:(id<GADFullScreenPresentingAd> _Nonnull)ad;
+		// @optional -(void)adWillDismissFullScreenContent:(id<GADFullScreenPresentingAd> _Nonnull)ad __attribute__((swift_attr("@UIActor")));
 		[Export("adWillDismissFullScreenContent:")]
 		void AdWillDismissFullScreenContent(GADFullScreenPresentingAd ad);
 
-		// @optional -(void)adDidDismissFullScreenContent:(id<GADFullScreenPresentingAd> _Nonnull)ad;
+		// @optional -(void)adDidDismissFullScreenContent:(id<GADFullScreenPresentingAd> _Nonnull)ad __attribute__((swift_attr("@UIActor")));
 		[Export("adDidDismissFullScreenContent:")]
 		void AdDidDismissFullScreenContent(GADFullScreenPresentingAd ad);
 	}
@@ -446,19 +454,19 @@ namespace Maui.MobileAds
 	interface GADAdNetworkResponseInfo
 	{
 		// @property (readonly, nonatomic) NSString * _Nonnull adNetworkClassName;
-		[Export("adNetworkClassName")] 
+		[Export("adNetworkClassName")]
 		string AdNetworkClassName { get; }
 
 		// @property (readonly, nonatomic) NSDictionary<NSString *,id> * _Nonnull adUnitMapping;
-		[Export("adUnitMapping")] 
+		[Export("adUnitMapping")]
 		NSDictionary<NSString, NSObject> AdUnitMapping { get; }
 
 		// @property (readonly, nonatomic) NSString * _Nullable adSourceName;
-		[NullAllowed, Export("adSourceName")] 
+		[NullAllowed, Export("adSourceName")]
 		string AdSourceName { get; }
 
 		// @property (readonly, nonatomic) NSString * _Nullable adSourceID;
-		[NullAllowed, Export("adSourceID")] 
+		[NullAllowed, Export("adSourceID")]
 		string AdSourceID { get; }
 
 		// @property (readonly, nonatomic) NSString * _Nullable adSourceInstanceName;
@@ -470,19 +478,17 @@ namespace Maui.MobileAds
 		string AdSourceInstanceID { get; }
 
 		// @property (readonly, nonatomic) NSError * _Nullable error;
-		[NullAllowed, Export("error")] 
+		[NullAllowed, Export("error")]
 		NSError Error { get; }
 
 		// @property (readonly, nonatomic) NSTimeInterval latency;
-		[Export("latency")] 
+		[Export("latency")]
 		double Latency { get; }
 
 		// @property (readonly, nonatomic) NSDictionary<NSString *,id> * _Nonnull dictionaryRepresentation;
-		[Export("dictionaryRepresentation")] 
+		[Export("dictionaryRepresentation")]
 		NSDictionary<NSString, NSObject> DictionaryRepresentation { get; }
 	}
-
-
 
 	// @interface GADResponseInfo : NSObject
 	[BaseType(typeof(NSObject))]
@@ -492,8 +498,8 @@ namespace Maui.MobileAds
 		[NullAllowed, Export("responseIdentifier")]
 		string ResponseIdentifier { get; }
 
-		// @property (readonly, nonatomic) NSDictionary<NSString *,id> * _Nonnull extrasDictionary;
-		[Export("extrasDictionary")] 
+		// @property (readonly, nonatomic) NS_SWIFT_NAME(extras) NSDictionary<NSString *,id> * extrasDictionary __attribute__((swift_name("extras")));
+		[Export("extrasDictionary")]
 		NSDictionary<NSString, NSObject> ExtrasDictionary { get; }
 
 		// @property (readonly, nonatomic) GADAdNetworkResponseInfo * _Nullable loadedAdNetworkResponseInfo;
@@ -501,50 +507,60 @@ namespace Maui.MobileAds
 		GADAdNetworkResponseInfo LoadedAdNetworkResponseInfo { get; }
 
 		// @property (readonly, nonatomic) NSArray<GADAdNetworkResponseInfo *> * _Nonnull adNetworkInfoArray;
-		[Export("adNetworkInfoArray")] 
+		[Export("adNetworkInfoArray")]
 		GADAdNetworkResponseInfo[] AdNetworkInfoArray { get; }
 
 		// @property (readonly, nonatomic) NSDictionary<NSString *,id> * _Nonnull dictionaryRepresentation;
-		[Export("dictionaryRepresentation")] 
+		[Export("dictionaryRepresentation")]
 		NSDictionary<NSString, NSObject> DictionaryRepresentation { get; }
 	}
 
-	// typedef void (^GADAppOpenAdLoadCompletionHandler)(GADAppOpenAd * _Nullable, NSError * _Nullable);
+	// typedef void(^GADAppOpenAdLoadCompletionHandler)(GADAppOpenAd * _Nullable, NSError * _Nullable);
 	delegate void GADAppOpenAdLoadCompletionHandler([NullAllowed] GADAppOpenAd arg0, [NullAllowed] NSError arg1);
 
 	// @interface GADAppOpenAd : NSObject <GADFullScreenPresentingAd>
 	[BaseType(typeof(NSObject))]
 	interface GADAppOpenAd : GADFullScreenPresentingAd
 	{
-		// +(void)loadWithAdUnitID:(NSString * _Nonnull)adUnitID request:(GADRequest * _Nullable)request completionHandler:(GADAppOpenAdLoadCompletionHandler _Nonnull)completionHandler;
+		// +(void)loadWithAdUnitID:(NSString * _Nonnull)adUnitID request:(GADRequest * _Nullable)request completionHandler:(GADAppOpenAdLoadCompletionHandler _Nonnull)completionHandler __attribute__((swift_name("load(with:request:completionHandler:)")));
 		[Static]
 		[Export("loadWithAdUnitID:request:completionHandler:")]
-		void LoadWithAdUnitID(string adUnitID, [NullAllowed] GADRequest request,
-			GADAppOpenAdLoadCompletionHandler completionHandler);
+		void LoadWithAdUnitID(string adUnitID, [NullAllowed] GADRequest request, GADAppOpenAdLoadCompletionHandler completionHandler);
 
-		// +(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString completionHandler:(GADAppOpenAdLoadCompletionHandler _Nonnull)completionHandler;
+		// +(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString completionHandler:(GADAppOpenAdLoadCompletionHandler _Nonnull)completionHandler __attribute__((swift_name("load(with:completionHandler:)")));
 		[Static]
-		[Export ("loadWithAdResponseString:completionHandler:")]
-		void LoadWithAdResponseString (string adResponseString, GADAppOpenAdLoadCompletionHandler completionHandler);
+		[Export("loadWithAdResponseString:completionHandler:")]
+		void LoadWithAdResponseString(string adResponseString, GADAppOpenAdLoadCompletionHandler completionHandler);
+
+		[Wrap("WeakFullScreenContentDelegate")]
+		[NullAllowed]
+		new GADFullScreenContentDelegate FullScreenContentDelegate { get; set; }
+
+		// @property (nonatomic, weak) id<GADFullScreenContentDelegate> _Nullable fullScreenContentDelegate;
+		[NullAllowed, Export("fullScreenContentDelegate", ArgumentSemantic.Weak)]
+		new NSObject WeakFullScreenContentDelegate { get; set; }
 
 		// @property (readonly, nonatomic) NSString * _Nonnull adUnitID;
-		[Export ("adUnitID")]
+		[Export("adUnitID")]
 		string AdUnitID { get; }
 
 		// @property (readonly, nonatomic) GADResponseInfo * _Nonnull responseInfo;
-		[Export("responseInfo")] 
+		[Export("responseInfo")]
 		GADResponseInfo ResponseInfo { get; }
 
 		// @property (copy, nonatomic) GADPaidEventHandler _Nullable paidEventHandler;
 		[NullAllowed, Export("paidEventHandler", ArgumentSemantic.Copy)]
 		GADPaidEventHandler PaidEventHandler { get; set; }
 
-		// -(BOOL)canPresentFromRootViewController:(UIViewController * _Nullable)rootViewController error:(NSError * _Nullable * _Nullable)error;
-		[Export("canPresentFromRootViewController:error:")]
-		bool CanPresentFromRootViewController([NullAllowed] UIViewController rootViewController,
-			[NullAllowed] out NSError error);
+		// @property (readwrite, nonatomic) int64_t placementID;
+		[Export("placementID")]
+		long PlacementID { get; set; }
 
-		// -(void)presentFromRootViewController:(UIViewController * _Nullable)rootViewController;
+		// -(BOOL)canPresentFromRootViewController:(UIViewController * _Nullable)rootViewController error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("canPresent(from:)"))) __attribute__((swift_attr("@UIActor")));
+		[Export("canPresentFromRootViewController:error:")]
+		bool CanPresentFromRootViewController([NullAllowed] UIViewController rootViewController, [NullAllowed] out NSError error);
+
+		// -(void)presentFromRootViewController:(UIViewController * _Nullable)rootViewController __attribute__((swift_name("present(from:)"))) __attribute__((swift_attr("@UIActor")));
 		[Export("presentFromRootViewController:")]
 		void PresentFromRootViewController([NullAllowed] UIViewController rootViewController);
 	}
@@ -575,15 +591,15 @@ namespace Maui.MobileAds
 	[BaseType(typeof(NSObject))]
 	interface GADAudioVideoManager
 	{
-		[Wrap("WeakDelegate")] 
-		[NullAllowed] 
+		[Wrap("WeakDelegate")]
+		[NullAllowed]
 		GADAudioVideoManagerDelegate Delegate { get; set; }
 
 		// @property (nonatomic, weak) id<GADAudioVideoManagerDelegate> _Nullable delegate;
 		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
 		NSObject WeakDelegate { get; set; }
 
-		// @property (assign, nonatomic) BOOL audioSessionIsApplicationManaged;
+		// @property (assign, nonatomic) BOOL audioSessionIsApplicationManaged __attribute__((swift_name("isAudioSessionApplicationManaged")));
 		[Export("audioSessionIsApplicationManaged")]
 		bool AudioSessionIsApplicationManaged { get; set; }
 	}
@@ -593,31 +609,31 @@ namespace Maui.MobileAds
 	[BaseType(typeof(NSObject))]
 	interface GADBannerViewDelegate
 	{
-		// @optional -(void)bannerViewDidReceiveAd:(GADBannerView * _Nonnull)bannerView;
+		// @optional -(void)bannerViewDidReceiveAd:(GADBannerView * _Nonnull)bannerView __attribute__((swift_attr("@UIActor")));
 		[Export("bannerViewDidReceiveAd:")]
 		void BannerViewDidReceiveAd(GADBannerView bannerView);
 
-		// @optional -(void)bannerView:(GADBannerView * _Nonnull)bannerView didFailToReceiveAdWithError:(NSError * _Nonnull)error;
+		// @optional -(void)bannerView:(GADBannerView * _Nonnull)bannerView didFailToReceiveAdWithError:(NSError * _Nonnull)error __attribute__((swift_attr("@UIActor")));
 		[Export("bannerView:didFailToReceiveAdWithError:")]
 		void BannerViewDidFailToReceiveAd(GADBannerView bannerView, NSError error);
 
-		// @optional -(void)bannerViewDidRecordImpression:(GADBannerView * _Nonnull)bannerView;
+		// @optional -(void)bannerViewDidRecordImpression:(GADBannerView * _Nonnull)bannerView __attribute__((swift_attr("@UIActor")));
 		[Export("bannerViewDidRecordImpression:")]
 		void BannerViewDidRecordImpression(GADBannerView bannerView);
 
-		// @optional -(void)bannerViewDidRecordClick:(GADBannerView * _Nonnull)bannerView;
+		// @optional -(void)bannerViewDidRecordClick:(GADBannerView * _Nonnull)bannerView __attribute__((swift_attr("@UIActor")));
 		[Export("bannerViewDidRecordClick:")]
 		void BannerViewDidRecordClick(GADBannerView bannerView);
 
-		// @optional -(void)bannerViewWillPresentScreen:(GADBannerView * _Nonnull)bannerView;
+		// @optional -(void)bannerViewWillPresentScreen:(GADBannerView * _Nonnull)bannerView __attribute__((swift_attr("@UIActor")));
 		[Export("bannerViewWillPresentScreen:")]
 		void BannerViewWillPresentScreen(GADBannerView bannerView);
 
-		// @optional -(void)bannerViewWillDismissScreen:(GADBannerView * _Nonnull)bannerView;
+		// @optional -(void)bannerViewWillDismissScreen:(GADBannerView * _Nonnull)bannerView __attribute__((swift_attr("@UIActor")));
 		[Export("bannerViewWillDismissScreen:")]
 		void BannerViewWillDismissScreen(GADBannerView bannerView);
 
-		// @optional -(void)bannerViewDidDismissScreen:(GADBannerView * _Nonnull)bannerView;
+		// @optional -(void)bannerViewDidDismissScreen:(GADBannerView * _Nonnull)bannerView __attribute__((swift_attr("@UIActor")));
 		[Export("bannerViewDidDismissScreen:")]
 		void BannerViewDidDismissScreen(GADBannerView bannerView);
 	}
@@ -646,8 +662,8 @@ namespace Maui.MobileAds
 		[Export("adSize", ArgumentSemantic.Assign)]
 		GADAdSize AdSize { get; set; }
 
-		[Wrap("WeakDelegate")] 
-		[NullAllowed] 
+		[Wrap("WeakDelegate")]
+		[NullAllowed]
 		GADBannerViewDelegate Delegate { get; set; }
 
 		// @property (nonatomic, weak) id<GADBannerViewDelegate> _Nullable delegate __attribute__((iboutlet));
@@ -666,24 +682,28 @@ namespace Maui.MobileAds
 		[Export("loadRequest:")]
 		void LoadRequest([NullAllowed] GADRequest request);
 
-		// -(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString;
-		[Export ("loadWithAdResponseString:")]
-		void LoadWithAdResponseString (string adResponseString);
+		// -(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString __attribute__((swift_name("load(with:)")));
+		[Export("loadWithAdResponseString:")]
+		void LoadWithAdResponseString(string adResponseString);
 
-		// @property (getter = isAutoloadEnabled, assign, nonatomic) BOOL autoloadEnabled;
-		[Export("autoloadEnabled")] 
+		// @property (getter = isAutoloadEnabled, assign, nonatomic) BOOL autoloadEnabled __attribute__((swift_name("isAutoloadEnabled")));
+		[Export("autoloadEnabled")]
 		bool AutoloadEnabled { [Bind("isAutoloadEnabled")] get; set; }
 
 		// @property (readonly, nonatomic) GADResponseInfo * _Nullable responseInfo;
-		[NullAllowed, Export("responseInfo")] 
+		[NullAllowed, Export("responseInfo")]
 		GADResponseInfo ResponseInfo { get; }
 
 		// @property (copy, nonatomic) GADPaidEventHandler _Nullable paidEventHandler;
 		[NullAllowed, Export("paidEventHandler", ArgumentSemantic.Copy)]
 		GADPaidEventHandler PaidEventHandler { get; set; }
 
+		// @property (readwrite, nonatomic) int64_t placementID;
+		[Export("placementID")]
+		long PlacementID { get; set; }
+
 		// @property (readonly, nonatomic) BOOL isCollapsible;
-		[Export ("isCollapsible")]
+		[Export("isCollapsible")]
 		bool IsCollapsible { get; }
 	}
 
@@ -781,8 +801,7 @@ namespace Maui.MobileAds
 		// @required -(void)requestBannerAd:(GADAdSize)adSize parameter:(NSString * _Nullable)serverParameter label:(NSString * _Nullable)serverLabel request:(GADCustomEventRequest * _Nonnull)request;
 		[Abstract]
 		[Export("requestBannerAd:parameter:label:request:")]
-		void RequestBannerAd(GADAdSize adSize, [NullAllowed] string serverParameter, [NullAllowed] string serverLabel,
-			GADCustomEventRequest request);
+		void RequestBannerAd(GADAdSize adSize, [NullAllowed] string serverParameter, [NullAllowed] string serverLabel, GADCustomEventRequest request);
 	}
 
 	// @interface GADCustomEventExtras : NSObject <GADAdNetworkExtras>
@@ -803,7 +822,7 @@ namespace Maui.MobileAds
 		void RemoveAllExtras();
 
 		// -(NSDictionary * _Nonnull)allExtras;
-		[Export("allExtras")] 
+		[Export("allExtras")]
 		NSDictionary AllExtras { get; }
 	}
 
@@ -879,8 +898,7 @@ namespace Maui.MobileAds
 		// @required -(void)requestInterstitialAdWithParameter:(NSString * _Nullable)serverParameter label:(NSString * _Nullable)serverLabel request:(GADCustomEventRequest * _Nonnull)request;
 		[Abstract]
 		[Export("requestInterstitialAdWithParameter:label:request:")]
-		void RequestInterstitialAd([NullAllowed] string serverParameter, [NullAllowed] string serverLabel,
-			GADCustomEventRequest request);
+		void RequestInterstitialAdWithParameter([NullAllowed] string serverParameter, [NullAllowed] string serverLabel, GADCustomEventRequest request);
 
 		// @required -(void)presentFromRootViewController:(UIViewController * _Nonnull)rootViewController;
 		[Abstract]
@@ -914,8 +932,7 @@ namespace Maui.MobileAds
 		// @required -(void)requestNativeAdWithParameter:(NSString * _Nonnull)serverParameter request:(GADCustomEventRequest * _Nonnull)request adTypes:(NSArray * _Nonnull)adTypes options:(NSArray * _Nonnull)options rootViewController:(UIViewController * _Nonnull)rootViewController;
 		[Abstract]
 		[Export("requestNativeAdWithParameter:request:adTypes:options:rootViewController:")]
-		void RequestNativeAd(string serverParameter, GADCustomEventRequest request, NSObject[] adTypes, NSObject[] options,
-			UIViewController rootViewController);
+		void RequestNativeAdWithParameter(string serverParameter, GADCustomEventRequest request, NSObject[] adTypes, NSObject[] options, UIViewController rootViewController);
 
 		// @required -(BOOL)handlesUserClicks;
 		[Abstract]
@@ -941,7 +958,7 @@ namespace Maui.MobileAds
 		NSUrl ImageURL { get; }
 
 		// @property (readonly, assign, nonatomic) CGFloat scale;
-		[Export("scale")] 
+		[Export("scale")]
 		nfloat Scale { get; }
 
 		// From Category GADNativeAdImage_MediationAdditions
@@ -1044,14 +1061,13 @@ namespace Maui.MobileAds
 
 		// @optional -(void)didRenderInView:(UIView * _Nonnull)view clickableAssetViews:(NSDictionary<GADNativeAssetIdentifier,UIView *> * _Nonnull)clickableAssetViews nonclickableAssetViews:(NSDictionary<GADNativeAssetIdentifier,UIView *> * _Nonnull)nonclickableAssetViews viewController:(UIViewController * _Nonnull)viewController;
 		[Export("didRenderInView:clickableAssetViews:nonclickableAssetViews:viewController:")]
-		void DidRenderInView(UIView view, NSDictionary<NSString, UIView> clickableAssetViews,
-			NSDictionary<NSString, UIView> nonclickableAssetViews, UIViewController viewController);
+		void DidRenderInView(UIView view, NSDictionary<NSString, UIView> clickableAssetViews, NSDictionary<NSString, UIView> nonclickableAssetViews, UIViewController viewController);
 
 		// @optional -(void)didRecordImpression;
 		[Export("didRecordImpression")]
 		void DidRecordImpression();
 
-		// @optional -(void)didRecordClickOnAssetWithName:(GADNativeAssetIdentifier _Nonnull)assetName view:(UIView * _Nonnull)view viewController:(UIViewController * _Nonnull)viewController;
+		// @optional -(void)didRecordClickOnAssetWithName:(GADNativeAssetIdentifier _Nonnull)assetName view:(UIView * _Nonnull)view viewController:(UIViewController * _Nonnull)viewController __attribute__((swift_name("didRecordClickOnAsset(with:view:viewController:)")));
 		[Export("didRecordClickOnAssetWithName:view:viewController:")]
 		void DidRecordClickOnAssetWithName(string assetName, UIView view, UIViewController viewController);
 
@@ -1073,8 +1089,7 @@ namespace Maui.MobileAds
 		// @required -(void)customEventNativeAd:(id<GADCustomEventNativeAd> _Nonnull)customEventNativeAd didReceiveMediatedUnifiedNativeAd:(id<GADMediatedUnifiedNativeAd> _Nonnull)mediatedUnifiedNativeAd;
 		[Abstract]
 		[Export("customEventNativeAd:didReceiveMediatedUnifiedNativeAd:")]
-		void DidReceiveMediatedUnifiedNativeAd(GADCustomEventNativeAd customEventNativeAd,
-			GADMediatedUnifiedNativeAd mediatedUnifiedNativeAd);
+		void DidReceiveMediatedUnifiedNativeAd(GADCustomEventNativeAd customEventNativeAd, GADMediatedUnifiedNativeAd mediatedUnifiedNativeAd);
 	}
 
 	// @interface GADDisplayAdMeasurement : NSObject
@@ -1087,7 +1102,7 @@ namespace Maui.MobileAds
 
 		// -(BOOL)startWithError:(NSError * _Nullable * _Nullable)error;
 		[Export("startWithError:")]
-		bool Start([NullAllowed] out NSError error);
+		bool StartWithError([NullAllowed] out NSError error);
 	}
 
 	// @interface GADVideoController : NSObject
@@ -1102,17 +1117,21 @@ namespace Maui.MobileAds
 		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
 		NSObject WeakDelegate { get; set; }
 
-		// @property (readonly, nonatomic) BOOL isMuted;
-		[Export("isMuted")]
-		bool IsMuted { get; }
+		// @property (getter = isMuted, nonatomic) BOOL muted;
+		[Export("muted")]
+		bool Muted { [Bind("isMuted")] get; set; }
 
-		// -(void)setMute:(BOOL)mute;
-		[Export("setMute:")]
-		void SetMute(bool mute);
+		// @property (readonly, getter = areCustomControlsEnabled, nonatomic) BOOL customControlsEnabled __attribute__((swift_name("areCustomControlsEnabled")));
+		[Export("customControlsEnabled")]
+		bool CustomControlsEnabled { [Bind("areCustomControlsEnabled")] get; }
+
+		// @property (readonly, getter = isClickToExpandEnabled, nonatomic) BOOL clickToExpandEnabled __attribute__((swift_name("isClickToExpandEnabled")));
+		[Export("clickToExpandEnabled")]
+		bool ClickToExpandEnabled { [Bind("isClickToExpandEnabled")] get; }
 
 		// -(void)play;
 		[Export("play")]
-		void Play();
+		void Play ();
 
 		// -(void)pause;
 		[Export("pause")]
@@ -1121,14 +1140,6 @@ namespace Maui.MobileAds
 		// -(void)stop;
 		[Export("stop")]
 		void Stop();
-
-		// -(BOOL)customControlsEnabled;
-		[Export("customControlsEnabled")] 
-		bool CustomControlsEnabled { get; }
-
-		// -(BOOL)clickToExpandEnabled;
-		[Export("clickToExpandEnabled")] 
-		bool ClickToExpandEnabled { get; }
 	}
 
 	// @interface GADMediaContent : NSObject
@@ -1160,16 +1171,6 @@ namespace Maui.MobileAds
 		[NullAllowed, Export("mainImage", ArgumentSemantic.Assign)]
 		UIImage MainImage { get; set; }
 	}
-
-	// // @interface NativeAd (GADMediaContent)
-	// [Category]
-	// [BaseType(typeof(GADMediaContent))]
-	// interface GADMediaContent_NativeAd
-	// {
-	// 	// @property (nonatomic) UIImage * _Nullable mainImage;
-	// 	[NullAllowed, Export("mainImage", ArgumentSemantic.Assign)]
-	// 	UIImage MainImage { get; set; }
-	// }
 
 	// @interface GADMediaView : UIView
 	[BaseType(typeof(UIView))]
@@ -1226,24 +1227,20 @@ namespace Maui.MobileAds
 		// -(GADNativeAdImage * _Nullable)imageForKey:(NSString * _Nonnull)key;
 		[Export("imageForKey:")]
 		[return: NullAllowed]
-		GADNativeAdImage ImageForKey(string key);
+		GADNativeAdImage ImageForKey (string key);
 
 		// -(NSString * _Nullable)stringForKey:(NSString * _Nonnull)key;
 		[Export("stringForKey:")]
 		[return: NullAllowed]
-		string StringForKey(string key);
+		string StringForKey (string key);
 
 		// -(void)performClickOnAssetWithKey:(NSString * _Nonnull)assetKey;
 		[Export("performClickOnAssetWithKey:")]
-		void PerformClickOnAssetWithKey(string assetKey);
+		void PerformClickOnAssetWithKey (string assetKey);
 
 		// -(void)recordImpression;
 		[Export("recordImpression")]
 		void RecordImpression();
-	}
-
-	interface IGADAdLoaderDelegate
-	{
 	}
 
 	// @protocol GADCustomNativeAdLoaderDelegate <GADAdLoaderDelegate>
@@ -1254,7 +1251,7 @@ namespace Maui.MobileAds
 		// @required -(NSArray<NSString *> * _Nonnull)customNativeAdFormatIDsForAdLoader:(GADAdLoader * _Nonnull)adLoader;
 		[Abstract]
 		[Export("customNativeAdFormatIDsForAdLoader:")]
-		string[] GetCustomNativeAdFormatIDs(GADAdLoader adLoader);
+		string[] CustomNativeAdFormatIDsForAdLoader(GADAdLoader adLoader);
 
 		// @required -(void)adLoader:(GADAdLoader * _Nonnull)adLoader didReceiveCustomNativeAd:(GADCustomNativeAd * _Nonnull)customNativeAd;
 		[Abstract]
@@ -1275,15 +1272,15 @@ namespace Maui.MobileAds
 		[Export("customNativeAdDidRecordClick:")]
 		void CustomNativeAdDidRecordClick(GADCustomNativeAd nativeAd);
 
-		// @optional -(void)customNativeAdWillPresentScreen:(GADCustomNativeAd * _Nonnull)nativeAd;
+		// @optional -(void)customNativeAdWillPresentScreen:(GADCustomNativeAd * _Nonnull)nativeAd __attribute__((swift_attr("@UIActor")));
 		[Export("customNativeAdWillPresentScreen:")]
 		void CustomNativeAdWillPresentScreen(GADCustomNativeAd nativeAd);
 
-		// @optional -(void)customNativeAdWillDismissScreen:(GADCustomNativeAd * _Nonnull)nativeAd;
+		// @optional -(void)customNativeAdWillDismissScreen:(GADCustomNativeAd * _Nonnull)nativeAd __attribute__((swift_attr("@UIActor")));
 		[Export("customNativeAdWillDismissScreen:")]
 		void CustomNativeAdWillDismissScreen(GADCustomNativeAd nativeAd);
 
-		// @optional -(void)customNativeAdDidDismissScreen:(GADCustomNativeAd * _Nonnull)nativeAd;
+		// @optional -(void)customNativeAdDidDismissScreen:(GADCustomNativeAd * _Nonnull)nativeAd __attribute__((swift_attr("@UIActor")));
 		[Export("customNativeAdDidDismissScreen:")]
 		void CustomNativeAdDidDismissScreen(GADCustomNativeAd nativeAd);
 	}
@@ -1317,176 +1314,6 @@ namespace Maui.MobileAds
 		NSObject WeakDelegate { get; set; }
 	}
 
-	// @interface GADDynamicHeightSearchRequest : GADRequest
-	[BaseType(typeof(GADRequest))]
-	interface GADDynamicHeightSearchRequest
-	{
-		// @property (copy, nonatomic) NSString * _Nullable query;
-		[NullAllowed, Export("query")]
-		string Query { get; set; }
-
-		// @property (assign, nonatomic) NSInteger adPage;
-		[Export("adPage")]
-		nint AdPage { get; set; }
-
-		// @property (assign, nonatomic) BOOL adTestEnabled;
-		[Export("adTestEnabled")]
-		bool AdTestEnabled { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable channel;
-		[NullAllowed, Export("channel")]
-		string Channel { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable hostLanguage;
-		[NullAllowed, Export("hostLanguage")]
-		string HostLanguage { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable locationExtensionTextColor;
-		[NullAllowed, Export("locationExtensionTextColor")]
-		string LocationExtensionTextColor { get; set; }
-
-		// @property (assign, nonatomic) CGFloat locationExtensionFontSize;
-		[Export("locationExtensionFontSize")]
-		nfloat LocationExtensionFontSize { get; set; }
-
-		// @property (assign, nonatomic) BOOL clickToCallExtensionEnabled;
-		[Export("clickToCallExtensionEnabled")]
-		bool ClickToCallExtensionEnabled { get; set; }
-
-		// @property (assign, nonatomic) BOOL locationExtensionEnabled;
-		[Export("locationExtensionEnabled")]
-		bool LocationExtensionEnabled { get; set; }
-
-		// @property (assign, nonatomic) BOOL plusOnesExtensionEnabled;
-		[Export("plusOnesExtensionEnabled")]
-		bool PlusOnesExtensionEnabled { get; set; }
-
-		// @property (assign, nonatomic) BOOL sellerRatingsExtensionEnabled;
-		[Export("sellerRatingsExtensionEnabled")]
-		bool SellerRatingsExtensionEnabled { get; set; }
-
-		// @property (assign, nonatomic) BOOL siteLinksExtensionEnabled;
-		[Export("siteLinksExtensionEnabled")]
-		bool SiteLinksExtensionEnabled { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable CSSWidth;
-		[NullAllowed, Export("CSSWidth")]
-		string CSSWidth { get; set; }
-
-		// @property (assign, nonatomic) NSInteger numberOfAds;
-		[Export("numberOfAds")]
-		nint NumberOfAds { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable fontFamily;
-		[NullAllowed, Export("fontFamily")]
-		string FontFamily { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable attributionFontFamily;
-		[NullAllowed, Export("attributionFontFamily")]
-		string AttributionFontFamily { get; set; }
-
-		// @property (assign, nonatomic) CGFloat annotationFontSize;
-		[Export("annotationFontSize")]
-		nfloat AnnotationFontSize { get; set; }
-
-		// @property (assign, nonatomic) CGFloat attributionFontSize;
-		[Export("attributionFontSize")]
-		nfloat AttributionFontSize { get; set; }
-
-		// @property (assign, nonatomic) CGFloat descriptionFontSize;
-		[Export("descriptionFontSize")]
-		nfloat DescriptionFontSize { get; set; }
-
-		// @property (assign, nonatomic) CGFloat domainLinkFontSize;
-		[Export("domainLinkFontSize")]
-		nfloat DomainLinkFontSize { get; set; }
-
-		// @property (assign, nonatomic) CGFloat titleFontSize;
-		[Export("titleFontSize")]
-		nfloat TitleFontSize { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable adBorderColor;
-		[NullAllowed, Export("adBorderColor")]
-		string AdBorderColor { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable adSeparatorColor;
-		[NullAllowed, Export("adSeparatorColor")]
-		string AdSeparatorColor { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable annotationTextColor;
-		[NullAllowed, Export("annotationTextColor")]
-		string AnnotationTextColor { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable attributionTextColor;
-		[NullAllowed, Export("attributionTextColor")]
-		string AttributionTextColor { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable backgroundColor;
-		[NullAllowed, Export("backgroundColor")]
-		string BackgroundColor { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable borderColor;
-		[NullAllowed, Export("borderColor")]
-		string BorderColor { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable domainLinkColor;
-		[NullAllowed, Export("domainLinkColor")]
-		string DomainLinkColor { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable textColor;
-		[NullAllowed, Export("textColor")]
-		string TextColor { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable titleLinkColor;
-		[NullAllowed, Export("titleLinkColor")]
-		string TitleLinkColor { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable adBorderCSSSelections;
-		[NullAllowed, Export("adBorderCSSSelections")]
-		string AdBorderCSSSelections { get; set; }
-
-		// @property (assign, nonatomic) CGFloat adjustableLineHeight;
-		[Export("adjustableLineHeight")]
-		nfloat AdjustableLineHeight { get; set; }
-
-		// @property (assign, nonatomic) CGFloat attributionBottomSpacing;
-		[Export("attributionBottomSpacing")]
-		nfloat AttributionBottomSpacing { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable borderCSSSelections;
-		[NullAllowed, Export("borderCSSSelections")]
-		string BorderCSSSelections { get; set; }
-
-		// @property (assign, nonatomic) BOOL titleUnderlineHidden;
-		[Export("titleUnderlineHidden")]
-		bool TitleUnderlineHidden { get; set; }
-
-		// @property (assign, nonatomic) BOOL boldTitleEnabled;
-		[Export("boldTitleEnabled")]
-		bool BoldTitleEnabled { get; set; }
-
-		// @property (assign, nonatomic) CGFloat verticalSpacing;
-		[Export("verticalSpacing")]
-		nfloat VerticalSpacing { get; set; }
-
-		// @property (assign, nonatomic) BOOL detailedAttributionExtensionEnabled;
-		[Export("detailedAttributionExtensionEnabled")]
-		bool DetailedAttributionExtensionEnabled { get; set; }
-
-		// @property (assign, nonatomic) BOOL longerHeadlinesExtensionEnabled;
-		[Export("longerHeadlinesExtensionEnabled")]
-		bool LongerHeadlinesExtensionEnabled { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable styleID;
-		[NullAllowed, Export("styleID")]
-		string StyleID { get; set; }
-
-		// -(void)setAdvancedOptionValue:(id _Nonnull)value forKey:(NSString * _Nonnull)key;
-		[Export("setAdvancedOptionValue:forKey:")]
-		void SetAdvancedOptionValue(NSObject value, string key);
-	}
-
-
 	// @interface GADExtras : NSObject <GADAdNetworkExtras>
 	[BaseType(typeof(NSObject))]
 	interface GADExtras : GADAdNetworkExtras
@@ -1503,6 +1330,10 @@ namespace Maui.MobileAds
 		// @property (readonly, nonatomic) GADAdapterInitializationState state;
 		[Export("state")]
 		GADAdapterInitializationState State { get; }
+
+		// @property (readonly, nonatomic) NSString * _Nonnull description;
+		[Export("description")]
+		string Description { get; }
 
 		// @property (readonly, nonatomic) NSTimeInterval latency;
 		[Export("latency")]
@@ -1526,14 +1357,13 @@ namespace Maui.MobileAds
 		[NullAllowed, Export("userIdentifier")]
 		string UserIdentifier { get; set; }
 
-		// @property (copy, nonatomic) NSString * _Nullable customRewardString;
-		[NullAllowed, Export("customRewardString")]
+		// @property (copy, nonatomic) NS_SWIFT_NAME(customRewardText) NSString * customRewardString __attribute__((swift_name("customRewardText")));
+		[Export("customRewardString")]
 		string CustomRewardString { get; set; }
 	}
 
-	// typedef void (^GADInterstitialAdLoadCompletionHandler)(GADInterstitialAd * _Nullable, NSError * _Nullable);
-	delegate void GADInterstitialAdLoadCompletionHandler([NullAllowed] GADInterstitialAd arg0,
-		[NullAllowed] NSError arg1);
+	// typedef void(^GADInterstitialAdLoadCompletionHandler)(GADInterstitialAd * _Nullable, NSError * _Nullable);
+	delegate void GADInterstitialAdLoadCompletionHandler([NullAllowed] GADInterstitialAd arg0, [NullAllowed] NSError arg1);
 
 	// @interface GADInterstitialAd : NSObject <GADFullScreenPresentingAd>
 	[BaseType(typeof(NSObject))]
@@ -1547,27 +1377,37 @@ namespace Maui.MobileAds
 		[Export("responseInfo")]
 		GADResponseInfo ResponseInfo { get; }
 
+		[Wrap("WeakFullScreenContentDelegate")]
+		[NullAllowed]
+		new GADFullScreenContentDelegate FullScreenContentDelegate { get; set; }
+
+		// @property (nonatomic, weak) id<GADFullScreenContentDelegate> _Nullable fullScreenContentDelegate;
+		[NullAllowed, Export("fullScreenContentDelegate", ArgumentSemantic.Weak)]
+		new NSObject WeakFullScreenContentDelegate { get; set; }
+
 		// @property (copy, nonatomic) GADPaidEventHandler _Nullable paidEventHandler;
 		[NullAllowed, Export("paidEventHandler", ArgumentSemantic.Copy)]
 		GADPaidEventHandler PaidEventHandler { get; set; }
 
-		// +(void)loadWithAdUnitID:(NSString * _Nonnull)adUnitID request:(GADRequest * _Nullable)request completionHandler:(GADInterstitialAdLoadCompletionHandler _Nonnull)completionHandler;
+		// @property (readwrite, nonatomic) int64_t placementID;
+		[Export("placementID")]
+		long PlacementID { get; set; }
+
+		// +(void)loadWithAdUnitID:(NSString * _Nonnull)adUnitID request:(GADRequest * _Nullable)request completionHandler:(GADInterstitialAdLoadCompletionHandler _Nonnull)completionHandler __attribute__((swift_name("load(with:request:completionHandler:)")));
 		[Static]
 		[Export("loadWithAdUnitID:request:completionHandler:")]
-		void LoadWithAdUnitID(string adUnitID, [NullAllowed] GADRequest request,
-			GADInterstitialAdLoadCompletionHandler completionHandler);
+		void LoadWithAdUnitID(string adUnitID, [NullAllowed] GADRequest request, GADInterstitialAdLoadCompletionHandler completionHandler);
 
-		// +(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString completionHandler:(GADInterstitialAdLoadCompletionHandler _Nonnull)completionHandler;
+		// +(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString completionHandler:(GADInterstitialAdLoadCompletionHandler _Nonnull)completionHandler __attribute__((swift_name("load(with:completionHandler:)")));
 		[Static]
-		[Export ("loadWithAdResponseString:completionHandler:")]
-		void LoadWithAdResponseString (string adResponseString, GADInterstitialAdLoadCompletionHandler completionHandler);
+		[Export("loadWithAdResponseString:completionHandler:")]
+		void LoadWithAdResponseString(string adResponseString, GADInterstitialAdLoadCompletionHandler completionHandler);
 
-		// -(BOOL)canPresentFromRootViewController:(UIViewController * _Nullable)rootViewController error:(NSError * _Nullable * _Nullable)error;
+		// -(BOOL)canPresentFromRootViewController:(UIViewController * _Nullable)rootViewController error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("canPresent(from:)"))) __attribute__((swift_attr("@UIActor")));
 		[Export("canPresentFromRootViewController:error:")]
-		bool CanPresentFromRootViewController([NullAllowed] UIViewController rootViewController,
-			[NullAllowed] out NSError error);
+		bool CanPresentFromRootViewController([NullAllowed] UIViewController rootViewController, [NullAllowed] out NSError error);
 
-		// -(void)presentFromRootViewController:(UIViewController * _Nullable)rootViewController;
+		// -(void)presentFromRootViewController:(UIViewController * _Nullable)rootViewController __attribute__((swift_name("present(from:)"))) __attribute__((swift_attr("@UIActor")));
 		[Export("presentFromRootViewController:")]
 		void PresentFromRootViewController([NullAllowed] UIViewController rootViewController);
 	}
@@ -1602,85 +1442,85 @@ namespace Maui.MobileAds
 	}
 
 	// @interface GADSignal : NSObject
-	[BaseType (typeof(NSObject))]
+	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
 	interface GADSignal
 	{
-		// @property (readonly, nonatomic) NSString * _Nonnull signalString;
-		[Export ("signalString")]
+		// @property (readonly, nonatomic) NS_SWIFT_NAME(signal) NSString * signalString __attribute__((swift_name("signal")));
+		[Export("signalString")]
 		string SignalString { get; }
 	}
 
 	// @interface GADSignalRequest : NSObject <NSCopying>
-	[BaseType (typeof(NSObject))]
+	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
 	interface GADSignalRequest : INSCopying
 	{
 		// -(void)registerAdNetworkExtras:(id<GADAdNetworkExtras> _Nonnull)extras;
-		[Export ("registerAdNetworkExtras:")]
-		void RegisterAdNetworkExtras (GADAdNetworkExtras extras);
+		[Export("registerAdNetworkExtras:")]
+		void RegisterAdNetworkExtras(GADAdNetworkExtras extras);
 
 		// -(id<GADAdNetworkExtras> _Nullable)adNetworkExtrasFor:(Class<GADAdNetworkExtras> _Nonnull)aClass;
-		[Export ("adNetworkExtrasFor:")]
+		[Export("adNetworkExtrasFor:")]
 		[return: NullAllowed]
-		GADAdNetworkExtras AdNetworkExtrasFor (GADAdNetworkExtras aClass);
+		GADAdNetworkExtras AdNetworkExtrasFor(GADAdNetworkExtras aClass);
 
 		// -(void)removeAdNetworkExtrasFor:(Class<GADAdNetworkExtras> _Nonnull)aClass;
-		[Export ("removeAdNetworkExtrasFor:")]
-		void RemoveAdNetworkExtrasFor (GADAdNetworkExtras aClass);
+		[Export("removeAdNetworkExtrasFor:")]
+		void RemoveAdNetworkExtrasFor(GADAdNetworkExtras aClass);
 
-		// @property (nonatomic, weak) API_AVAILABLE(ios(13.0)) UIWindowScene * scene __attribute__((availability(ios, introduced=13.0)));
+		// @property (nonatomic, weak) API_AVAILABLE(ios(13.0)) UIWindowScene * scene __attribute__((availability (ios, introduced=13.0)));
 		[System.Runtime.Versioning.SupportedOSPlatform("ios13.0")]
-		[Export ("scene", ArgumentSemantic.Weak)]
+		[Export("scene", ArgumentSemantic.Weak)]
 		UIWindowScene Scene { get; set; }
 
 		// @property (copy, nonatomic) NSArray<NSString *> * _Nullable keywords;
-		[NullAllowed, Export ("keywords", ArgumentSemantic.Copy)]
+		[NullAllowed, Export("keywords", ArgumentSemantic.Copy)]
 		string[] Keywords { get; set; }
 
 		// @property (copy, nonatomic) NSString * _Nullable contentURL;
-		[NullAllowed, Export ("contentURL")]
+		[NullAllowed, Export("contentURL")]
 		string ContentURL { get; set; }
 
-		// @property (copy, nonatomic) NSArray<NSString *> * _Nullable neighboringContentURLStrings;
-		[NullAllowed, Export ("neighboringContentURLStrings", ArgumentSemantic.Copy)]
+		// @property (copy, nonatomic) NS_SWIFT_NAME(neighboringContentURLs) NSArray<NSString *> * neighboringContentURLStrings __attribute__((swift_name("neighboringContentURLs")));
+		[Export("neighboringContentURLStrings", ArgumentSemantic.Copy)]
 		string[] NeighboringContentURLStrings { get; set; }
 
 		// @property (copy, nonatomic) NSString * _Nullable requestAgent;
-		[NullAllowed, Export ("requestAgent")]
+		[NullAllowed, Export("requestAgent")]
 		string RequestAgent { get; set; }
 
 		// @property (copy, nonatomic) NSString * _Nullable publisherProvidedID;
-		[NullAllowed, Export ("publisherProvidedID")]
+		[NullAllowed, Export("publisherProvidedID")]
 		string PublisherProvidedID { get; set; }
 
 		// @property (copy, nonatomic) NSArray<NSString *> * _Nullable categoryExclusions;
-		[NullAllowed, Export ("categoryExclusions", ArgumentSemantic.Copy)]
+		[NullAllowed, Export("categoryExclusions", ArgumentSemantic.Copy)]
 		string[] CategoryExclusions { get; set; }
 
-		// @property (copy, nonatomic) NSDictionary<NSString *,NSString *> * _Nullable customTargeting;
-		[NullAllowed, Export ("customTargeting", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSString> CustomTargeting { get; set; }
+		// @property (copy, nonatomic) NSDictionary<NSString *,id> * _Nullable customTargeting;
+		[NullAllowed, Export("customTargeting", ArgumentSemantic.Copy)]
+		NSDictionary<NSString, NSObject> CustomTargeting { get; set; }
 
 		// @property (copy, nonatomic) NSString * _Nullable adUnitID;
-		[NullAllowed, Export ("adUnitID")]
+		[NullAllowed, Export("adUnitID")]
 		string AdUnitID { get; set; }
 	}
 
-	// typedef void (^GADInitializationCompletionHandler)(GADInitializationStatus * _Nonnull);
+	// typedef void(^GADInitializationCompletionHandler)(GADInitializationStatus * _Nonnull);
 	delegate void GADInitializationCompletionHandler(GADInitializationStatus arg0);
 
-	// typedef void (^GADAdInspectorCompletionHandler)(NSError * _Nullable);
+	// typedef void(^GADAdInspectorCompletionHandler)(NSError * _Nullable);
 	delegate void GADAdInspectorCompletionHandler([NullAllowed] NSError arg0);
 
-	// typedef void (^GADSignalCompletionHandler)(GADSignal * _Nullable, NSError * _Nullable);
-	delegate void GADSignalCompletionHandler ([NullAllowed] GADSignal arg0, [NullAllowed] NSError arg1);
+	// typedef void(^GADSignalCompletionHandler)(GADSignal * _Nullable, NSError * _Nullable);
+	delegate void GADSignalCompletionHandler([NullAllowed] GADSignal arg0, [NullAllowed] NSError arg1);
 
 	// @interface GADMobileAds : NSObject
 	[BaseType(typeof(NSObject))]
 	interface GADMobileAds
 	{
-		// +(GADMobileAds * _Nonnull)sharedInstance;
+		// @property (readonly, nonatomic, class) NS_SWIFT_NAME(shared) GADMobileAds * sharedInstance __attribute__((swift_name("shared")));
 		[Static]
 		[Export("sharedInstance")]
 		GADMobileAds SharedInstance { get; }
@@ -1693,9 +1533,9 @@ namespace Maui.MobileAds
 		[Export("applicationVolume")]
 		float ApplicationVolume { get; set; }
 
-		// @property (assign, nonatomic) BOOL applicationMuted;
+		// @property (getter = isApplicationMuted, assign, nonatomic) BOOL applicationMuted __attribute__((swift_name("isApplicationMuted")));
 		[Export("applicationMuted")]
-		bool ApplicationMuted { get; set; }
+		bool ApplicationMuted { [Bind("isApplicationMuted")] get; set; }
 
 		// @property (readonly, nonatomic, strong) GADAudioVideoManager * _Nonnull audioVideoManager;
 		[Export("audioVideoManager", ArgumentSemantic.Strong)]
@@ -1725,10 +1565,9 @@ namespace Maui.MobileAds
 		[Export("disableMediationInitialization")]
 		void DisableMediationInitialization();
 
-		// -(void)presentAdInspectorFromViewController:(UIViewController * _Nullable)viewController completionHandler:(GADAdInspectorCompletionHandler _Nullable)completionHandler;
+		// -(void)presentAdInspectorFromViewController:(UIViewController * _Nullable)viewController completionHandler:(GADAdInspectorCompletionHandler _Nullable)completionHandler __attribute__((swift_name("presentAdInspector(from:completionHandler:)")));
 		[Export("presentAdInspectorFromViewController:completionHandler:")]
-		void PresentAdInspectorFromViewController([NullAllowed] UIViewController viewController,
-			[NullAllowed] GADAdInspectorCompletionHandler completionHandler);
+		void PresentAdInspectorFromViewController([NullAllowed] UIViewController viewController, [NullAllowed] GADAdInspectorCompletionHandler completionHandler);
 
 		// -(void)registerWebView:(WKWebView * _Nonnull)webView;
 		[Export("registerWebView:")]
@@ -1736,8 +1575,8 @@ namespace Maui.MobileAds
 
 		// +(void)generateSignal:(GADSignalRequest * _Nonnull)request completionHandler:(GADSignalCompletionHandler _Nonnull)completionHandler;
 		[Static]
-		[Export ("generateSignal:completionHandler:")]
-		void GenerateSignal (GADSignalRequest request, GADSignalCompletionHandler completionHandler);
+		[Export("generateSignal:completionHandler:")]
+		void GenerateSignal(GADSignalRequest request, GADSignalCompletionHandler completionHandler);
 	}
 
 	// @interface GADMultipleAdsAdLoaderOptions : GADAdLoaderOptions
@@ -1753,7 +1592,7 @@ namespace Maui.MobileAds
 	[BaseType(typeof(NSObject))]
 	interface GADMuteThisAdReason
 	{
-		// @property (readonly, nonatomic) NSString * _Nonnull reasonDescription;
+		// @property (readonly, nonatomic) NS_SWIFT_NAME(reason) NSString * reasonDescription __attribute__((swift_name("reason")));
 		[Export("reasonDescription")]
 		string ReasonDescription { get; }
 	}
@@ -1775,25 +1614,21 @@ namespace Maui.MobileAds
 		[Export("nativeAdDidRecordSwipeGestureClick:")]
 		void NativeAdDidRecordSwipeGestureClick(GADNativeAd nativeAd);
 
-		// @optional -(void)nativeAdWillPresentScreen:(GADNativeAd * _Nonnull)nativeAd;
+		// @optional -(void)nativeAdWillPresentScreen:(GADNativeAd * _Nonnull)nativeAd __attribute__((swift_attr("@UIActor")));
 		[Export("nativeAdWillPresentScreen:")]
 		void NativeAdWillPresentScreen(GADNativeAd nativeAd);
 
-		// @optional -(void)nativeAdWillDismissScreen:(GADNativeAd * _Nonnull)nativeAd;
+		// @optional -(void)nativeAdWillDismissScreen:(GADNativeAd * _Nonnull)nativeAd __attribute__((swift_attr("@UIActor")));
 		[Export("nativeAdWillDismissScreen:")]
 		void NativeAdWillDismissScreen(GADNativeAd nativeAd);
 
-		// @optional -(void)nativeAdDidDismissScreen:(GADNativeAd * _Nonnull)nativeAd;
+		// @optional -(void)nativeAdDidDismissScreen:(GADNativeAd * _Nonnull)nativeAd __attribute__((swift_attr("@UIActor")));
 		[Export("nativeAdDidDismissScreen:")]
 		void NativeAdDidDismissScreen(GADNativeAd nativeAd);
 
 		// @optional -(void)nativeAdIsMuted:(GADNativeAd * _Nonnull)nativeAd;
 		[Export("nativeAdIsMuted:")]
 		void NativeAdIsMuted(GADNativeAd nativeAd);
-	}
-
-	interface IGADNativeAdDelegate
-	{
 	}
 
 	// @interface GADNativeAd : NSObject
@@ -1825,13 +1660,16 @@ namespace Maui.MobileAds
 		NSDecimalNumber StarRating { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * _Nullable store;
-		[NullAllowed, Export("store")] string Store { get; }
+		[NullAllowed, Export("store")]
+		string Store { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * _Nullable price;
-		[NullAllowed, Export("price")] string Price { get; }
+		[NullAllowed, Export("price")]
+		string Price { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * _Nullable advertiser;
-		[NullAllowed, Export("advertiser")] string Advertiser { get; }
+		[NullAllowed, Export("advertiser")]
+		string Advertiser { get; }
 
 		// @property (readonly, nonatomic) GADMediaContent * _Nonnull mediaContent;
 		[Export("mediaContent")]
@@ -1839,7 +1677,7 @@ namespace Maui.MobileAds
 
 		[Wrap("WeakDelegate")]
 		[NullAllowed]
-		IGADNativeAdDelegate Delegate { get; set; }
+		GADNativeAdDelegate Delegate { get; set; }
 
 		// @property (nonatomic, weak) id<GADNativeAdDelegate> _Nullable delegate;
 		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
@@ -1861,7 +1699,11 @@ namespace Maui.MobileAds
 		[NullAllowed, Export("paidEventHandler", ArgumentSemantic.Copy)]
 		GADPaidEventHandler PaidEventHandler { get; set; }
 
-		// @property (readonly, getter = isCustomMuteThisAdAvailable, nonatomic) BOOL customMuteThisAdAvailable;
+		// @property (readwrite, nonatomic) int64_t placementID;
+		[Export("placementID")]
+		long PlacementID { get; set; }
+
+		// @property (readonly, getter = isCustomMuteThisAdAvailable, nonatomic) BOOL customMuteThisAdAvailable __attribute__((swift_name("isCustomMuteThisAdAvailable")));
 		[Export("customMuteThisAdAvailable")]
 		bool CustomMuteThisAdAvailable { [Bind("isCustomMuteThisAdAvailable")] get; }
 
@@ -1871,8 +1713,7 @@ namespace Maui.MobileAds
 
 		// -(void)registerAdView:(UIView * _Nonnull)adView clickableAssetViews:(NSDictionary<GADNativeAssetIdentifier,UIView *> * _Nonnull)clickableAssetViews nonclickableAssetViews:(NSDictionary<GADNativeAssetIdentifier,UIView *> * _Nonnull)nonclickableAssetViews;
 		[Export("registerAdView:clickableAssetViews:nonclickableAssetViews:")]
-		void RegisterAdView(UIView adView, NSDictionary<NSString, UIView> clickableAssetViews,
-			NSDictionary<NSString, UIView> nonclickableAssetViews);
+		void RegisterAdView(UIView adView, NSDictionary<NSString, UIView> clickableAssetViews, NSDictionary<NSString, UIView> nonclickableAssetViews);
 
 		// -(void)unregisterAdView;
 		[Export("unregisterAdView")]
@@ -1882,8 +1723,8 @@ namespace Maui.MobileAds
 		[Export("muteThisAdWithReason:")]
 		void MuteThisAdWithReason([NullAllowed] GADMuteThisAdReason reason);
 
-		// From Category
-		// @property (readonly, getter = isCustomClickGestureEnabled, nonatomic) BOOL customClickGestureEnabled;
+		// From  Category GADNativeAd_ConfirmedClick
+		// @property (readonly, getter = isCustomClickGestureEnabled, nonatomic) BOOL customClickGestureEnabled __attribute__((swift_name("isCustomClickGestureEnabled")));
 		[Export("customClickGestureEnabled")]
 		bool CustomClickGestureEnabled { [Bind("isCustomClickGestureEnabled")] get; }
 
@@ -1895,7 +1736,7 @@ namespace Maui.MobileAds
 		[Export("recordCustomClickGesture")]
 		void RecordCustomClickGesture();
 
-		// From Category
+		// From Category GADNativeAd_ConfirmedClick
 		[Wrap("WeakUnconfirmedClickDelegate")]
 		[NullAllowed]
 		GADNativeAdUnconfirmedClickDelegate UnconfirmedClickDelegate { get; set; }
@@ -1993,46 +1834,6 @@ namespace Maui.MobileAds
 		void NativeAdDidCancelUnconfirmedClick(GADNativeAd nativeAd);
 	}
 
-	// // @interface ConfirmedClick (GADNativeAd)
-	// [Category]
-	// [BaseType(typeof(GADNativeAd))]
-	// interface GADNativeAd_ConfirmedClick
-	// {
-	// 	[Wrap("WeakUnconfirmedClickDelegate")]
-	// 	[NullAllowed]
-	// 	GADNativeAdUnconfirmedClickDelegate UnconfirmedClickDelegate { get; set; }
-	//
-	// 	// @property (nonatomic, weak) id<GADNativeAdUnconfirmedClickDelegate> _Nullable unconfirmedClickDelegate;
-	// 	[NullAllowed, Export("unconfirmedClickDelegate", ArgumentSemantic.Weak)]
-	// 	NSObject WeakUnconfirmedClickDelegate { get; set; }
-	//
-	// 	// -(void)registerClickConfirmingView:(UIView * _Nullable)view;
-	// 	[Export("registerClickConfirmingView:")]
-	// 	void RegisterClickConfirmingView([NullAllowed] UIView view);
-	//
-	// 	// -(void)cancelUnconfirmedClick;
-	// 	[Export("cancelUnconfirmedClick")]
-	// 	void CancelUnconfirmedClick();
-	// }
-
-	// // @interface CustomClickGesture (GADNativeAd)
-	// [Category]
-	// [BaseType (typeof(GADNativeAd))]
-	// interface GADNativeAd_CustomClickGesture
-	// {
-	// 	// @property (readonly, getter = isCustomClickGestureEnabled, nonatomic) BOOL customClickGestureEnabled;
-	// 	[Export ("customClickGestureEnabled")]
-	// 	bool CustomClickGestureEnabled { [Bind ("isCustomClickGestureEnabled")] get; }
-	//
-	// 	// -(void)enableCustomClickGestures;
-	// 	[Export ("enableCustomClickGestures")]
-	// 	void EnableCustomClickGestures ();
-	//
-	// 	// -(void)recordCustomClickGesture;
-	// 	[Export ("recordCustomClickGesture")]
-	// 	void RecordCustomClickGesture ();
-	// }
-
 	// @interface GADNativeAdCustomClickGestureOptions : GADAdLoaderOptions
 	[BaseType(typeof(GADAdLoaderOptions))]
 	[DisableDefaultCtor]
@@ -2042,9 +1843,9 @@ namespace Maui.MobileAds
 		[Export("swipeGestureDirection", ArgumentSemantic.Assign)]
 		UISwipeGestureRecognizerDirection SwipeGestureDirection { get; set; }
 
-		// @property (assign, nonatomic) BOOL tapsAllowed;
+		// @property (getter = areTapsAllowed, assign, nonatomic) BOOL tapsAllowed __attribute__((swift_name("areTapsAllowed")));
 		[Export("tapsAllowed")]
-		bool TapsAllowed { get; set; }
+		bool TapsAllowed { [Bind("areTapsAllowed")] get; set; }
 
 		// -(instancetype _Nonnull)initWithSwipeGestureDirection:(UISwipeGestureRecognizerDirection)direction tapsAllowed:(BOOL)tapsAllowed __attribute__((objc_designated_initializer));
 		[Export("initWithSwipeGestureDirection:tapsAllowed:")]
@@ -2052,25 +1853,11 @@ namespace Maui.MobileAds
 		NativeHandle Constructor(UISwipeGestureRecognizerDirection direction, bool tapsAllowed);
 	}
 
-	// // @interface MediationAdditions (GADNativeAdImage)
-	// [Category]
-	// [BaseType(typeof(GADNativeAdImage))]
-	// interface GADNativeAdImage_MediationAdditions
-	// {
-	// 	// -(instancetype _Nonnull)initWithImage:(UIImage * _Nonnull)image;
-	// 	[Export("initWithImage:")]
-	// 	NativeHandle Constructor(UIImage image);
-	//
-	// 	// -(instancetype _Nonnull)initWithURL:(NSURL * _Nonnull)URL scale:(CGFloat)scale;
-	// 	[Export("initWithURL:scale:")]
-	// 	NativeHandle Constructor(NSUrl URL, nfloat scale);
-	// }
-
 	// @interface GADNativeAdImageAdLoaderOptions : GADAdLoaderOptions
 	[BaseType(typeof(GADAdLoaderOptions))]
 	interface GADNativeAdImageAdLoaderOptions
 	{
-		// @property (assign, nonatomic) BOOL disableImageLoading;
+		// @property (assign, nonatomic) BOOL disableImageLoading __attribute__((swift_name("isImageLoadingDisabled")));
 		[Export("disableImageLoading")]
 		bool DisableImageLoading { get; set; }
 
@@ -2101,12 +1888,12 @@ namespace Maui.MobileAds
 	[BaseType(typeof(GADAdLoaderOptions))]
 	interface GADNativeMuteThisAdLoaderOptions
 	{
-		// @property (nonatomic) BOOL customMuteThisAdRequested;
+		// @property (nonatomic) BOOL customMuteThisAdRequested __attribute__((swift_name("isCustomMuteThisAdRequested")));
 		[Export("customMuteThisAdRequested")]
 		bool CustomMuteThisAdRequested { get; set; }
 	}
 
-	// typedef void (^GADQueryInfoCreationCompletionHandler)(GADQueryInfo * _Nullable, NSError * _Nullable);
+	// typedef void(^GADQueryInfoCreationCompletionHandler)(GADQueryInfo * _Nullable, NSError * _Nullable);
 	delegate void GADQueryInfoCreationCompletionHandler([NullAllowed] GADQueryInfo arg0, [NullAllowed] NSError arg1);
 
 	// @interface GADQueryInfo : NSObject
@@ -2114,22 +1901,21 @@ namespace Maui.MobileAds
 	interface GADQueryInfo
 	{
 		// @property (readonly, nonatomic) NSString * _Nonnull query;
-		[Export("query")] string Query { get; }
+		[Export("query")]
+		string Query { get; }
 
-		// +(void)createQueryInfoWithRequest:(GADRequest * _Nullable)request adFormat:(GADAdFormat)adFormat completionHandler:(GADQueryInfoCreationCompletionHandler _Nonnull)completionHandler;
+		// +(void)createQueryInfoWithRequest:(GADRequest * _Nullable)request adFormat:(GADAdFormat)adFormat completionHandler:(GADQueryInfoCreationCompletionHandler _Nonnull)completionHandler __attribute__((deprecated("Use +[GADMobileAds generateSignal:completionHandler:] instead.")));
 		[Static]
 		[Export("createQueryInfoWithRequest:adFormat:completionHandler:")]
-		void CreateQueryInfo([NullAllowed] GADRequest request, GADAdFormat adFormat,
-			GADQueryInfoCreationCompletionHandler completionHandler);
+		void CreateQueryInfoWithRequest([NullAllowed] GADRequest request, GADAdFormat adFormat, GADQueryInfoCreationCompletionHandler completionHandler);
 
-		// +(void)createQueryInfoWithRequest:(GADRequest * _Nullable)request adFormat:(GADAdFormat)adFormat adUnitID:(NSString * _Nonnull)adUnitID completionHandler:(GADQueryInfoCreationCompletionHandler _Nonnull)completionHandler;
+		// +(void)createQueryInfoWithRequest:(GADRequest * _Nullable)request adFormat:(GADAdFormat)adFormat adUnitID:(NSString * _Nonnull)adUnitID completionHandler:(GADQueryInfoCreationCompletionHandler _Nonnull)completionHandler __attribute__((deprecated("Use +[GADMobileAds generateSignal:completionHandler:] instead. Set adUnitID in the GADSignalRequest subclass.")));
 		[Static]
 		[Export("createQueryInfoWithRequest:adFormat:adUnitID:completionHandler:")]
-		void CreateQueryInfo([NullAllowed] GADRequest request, GADAdFormat adFormat, string adUnitID,
-			GADQueryInfoCreationCompletionHandler completionHandler);
+		void CreateQueryInfoWithRequest([NullAllowed] GADRequest request, GADAdFormat adFormat, string adUnitID, GADQueryInfoCreationCompletionHandler completionHandler);
 	}
 
-	// typedef void (^GADRewardedAdLoadCompletionHandler)(GADRewardedAd * _Nullable, NSError * _Nullable);
+	// typedef void(^GADRewardedAdLoadCompletionHandler)(GADRewardedAd * _Nullable, NSError * _Nullable);
 	delegate void GADRewardedAdLoadCompletionHandler([NullAllowed] GADRewardedAd arg0, [NullAllowed] NSError arg1);
 
 	// @interface GADRewardedAd : NSObject <GADAdMetadataProvider, GADFullScreenPresentingAd>
@@ -2152,35 +1938,43 @@ namespace Maui.MobileAds
 		[NullAllowed, Export("serverSideVerificationOptions", ArgumentSemantic.Copy)]
 		GADServerSideVerificationOptions ServerSideVerificationOptions { get; set; }
 
+		[Wrap("WeakFullScreenContentDelegate")]
+		[NullAllowed]
+		new GADFullScreenContentDelegate FullScreenContentDelegate { get; set; }
+
+		// @property (nonatomic, weak) id<GADFullScreenContentDelegate> _Nullable fullScreenContentDelegate;
+		[NullAllowed, Export("fullScreenContentDelegate", ArgumentSemantic.Weak)]
+		new NSObject WeakFullScreenContentDelegate { get; set; }
+
 		// @property (copy, nonatomic) GADPaidEventHandler _Nullable paidEventHandler;
 		[NullAllowed, Export("paidEventHandler", ArgumentSemantic.Copy)]
 		GADPaidEventHandler PaidEventHandler { get; set; }
 
-		// +(void)loadWithAdUnitID:(NSString * _Nonnull)adUnitID request:(GADRequest * _Nullable)request completionHandler:(GADRewardedAdLoadCompletionHandler _Nonnull)completionHandler;
+		// @property (readwrite, nonatomic) int64_t placementID;
+		[Export("placementID")]
+		long PlacementID { get; set; }
+
+		// +(void)loadWithAdUnitID:(NSString * _Nonnull)adUnitID request:(GADRequest * _Nullable)request completionHandler:(GADRewardedAdLoadCompletionHandler _Nonnull)completionHandler __attribute__((swift_name("load(with:request:completionHandler:)")));
 		[Static]
 		[Export("loadWithAdUnitID:request:completionHandler:")]
-		void LoadWithAdUnitID(string adUnitID, [NullAllowed] GADRequest request,
-			GADRewardedAdLoadCompletionHandler completionHandler);
+		void LoadWithAdUnitID(string adUnitID, [NullAllowed] GADRequest request, GADRewardedAdLoadCompletionHandler completionHandler);
 
-		// +(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString completionHandler:(GADRewardedAdLoadCompletionHandler _Nonnull)completionHandler;
+		// +(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString completionHandler:(GADRewardedAdLoadCompletionHandler _Nonnull)completionHandler __attribute__((swift_name("load(with:completionHandler:)")));
 		[Static]
-		[Export ("loadWithAdResponseString:completionHandler:")]
-		void LoadWithAdResponseString (string adResponseString, GADRewardedAdLoadCompletionHandler completionHandler);
+		[Export("loadWithAdResponseString:completionHandler:")]
+		void LoadWithAdResponseString(string adResponseString, GADRewardedAdLoadCompletionHandler completionHandler);
 
-		// -(BOOL)canPresentFromRootViewController:(UIViewController * _Nullable)rootViewController error:(NSError * _Nullable * _Nullable)error;
+		// -(BOOL)canPresentFromRootViewController:(UIViewController * _Nullable)rootViewController error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("canPresent(from:)"))) __attribute__((swift_attr("@UIActor")));
 		[Export("canPresentFromRootViewController:error:")]
-		bool CanPresentFromRootViewController([NullAllowed] UIViewController rootViewController,
-			[NullAllowed] out NSError error);
+		bool CanPresentFromRootViewController([NullAllowed] UIViewController rootViewController, [NullAllowed] out NSError error);
 
-		// -(void)presentFromRootViewController:(UIViewController * _Nullable)rootViewController userDidEarnRewardHandler:(GADUserDidEarnRewardHandler _Nonnull)userDidEarnRewardHandler;
+		// -(void)presentFromRootViewController:(UIViewController * _Nullable)rootViewController userDidEarnRewardHandler:(GADUserDidEarnRewardHandler _Nonnull)userDidEarnRewardHandler __attribute__((swift_name("present(from:userDidEarnRewardHandler:)"))) __attribute__((swift_attr("@UIActor")));
 		[Export("presentFromRootViewController:userDidEarnRewardHandler:")]
-		void PresentFromRootViewController([NullAllowed] UIViewController rootViewController,
-			GADUserDidEarnRewardHandler userDidEarnRewardHandler);
+		void PresentFromRootViewController([NullAllowed] UIViewController rootViewController, GADUserDidEarnRewardHandler userDidEarnRewardHandler);
 	}
 
-	// typedef void (^GADRewardedInterstitialAdLoadCompletionHandler)(GADRewardedInterstitialAd * _Nullable, NSError * _Nullable);
-	delegate void GADRewardedInterstitialAdLoadCompletionHandler([NullAllowed] GADRewardedInterstitialAd arg0,
-		[NullAllowed] NSError arg1);
+	// typedef void(^GADRewardedInterstitialAdLoadCompletionHandler)(GADRewardedInterstitialAd * _Nullable, NSError * _Nullable);
+	delegate void GADRewardedInterstitialAdLoadCompletionHandler([NullAllowed] GADRewardedInterstitialAd arg0, [NullAllowed] NSError arg1);
 
 	// @interface GADRewardedInterstitialAd : NSObject <GADAdMetadataProvider, GADFullScreenPresentingAd>
 	[BaseType(typeof(NSObject))]
@@ -2202,36 +1996,39 @@ namespace Maui.MobileAds
 		[NullAllowed, Export("serverSideVerificationOptions", ArgumentSemantic.Copy)]
 		GADServerSideVerificationOptions ServerSideVerificationOptions { get; set; }
 
+		[Wrap("WeakFullScreenContentDelegate")]
+		[NullAllowed]
+		new GADFullScreenContentDelegate FullScreenContentDelegate { get; set; }
+
+		// @property (nonatomic, weak) id<GADFullScreenContentDelegate> _Nullable fullScreenContentDelegate;
+		[NullAllowed, Export("fullScreenContentDelegate", ArgumentSemantic.Weak)]
+		new NSObject WeakFullScreenContentDelegate { get; set; }
+
 		// @property (copy, nonatomic) GADPaidEventHandler _Nullable paidEventHandler;
 		[NullAllowed, Export("paidEventHandler", ArgumentSemantic.Copy)]
 		GADPaidEventHandler PaidEventHandler { get; set; }
 
-		// +(void)loadWithAdUnitID:(NSString * _Nonnull)adUnitID request:(GADRequest * _Nullable)request completionHandler:(GADRewardedInterstitialAdLoadCompletionHandler _Nonnull)completionHandler;
+		// @property (readwrite, nonatomic) int64_t placementID;
+		[Export("placementID")]
+		long PlacementID { get; set; }
+
+		// +(void)loadWithAdUnitID:(NSString * _Nonnull)adUnitID request:(GADRequest * _Nullable)request completionHandler:(GADRewardedInterstitialAdLoadCompletionHandler _Nonnull)completionHandler __attribute__((swift_name("load(with:request:completionHandler:)")));
 		[Static]
 		[Export("loadWithAdUnitID:request:completionHandler:")]
-		void LoadWithAdUnitID(string adUnitID, [NullAllowed] GADRequest request,
-			GADRewardedInterstitialAdLoadCompletionHandler completionHandler);
+		void LoadWithAdUnitID(string adUnitID, [NullAllowed] GADRequest request, GADRewardedInterstitialAdLoadCompletionHandler completionHandler);
 
-		// +(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString completionHandler:(GADRewardedInterstitialAdLoadCompletionHandler _Nonnull)completionHandler;
+		// +(void)loadWithAdResponseString:(NSString * _Nonnull)adResponseString completionHandler:(GADRewardedInterstitialAdLoadCompletionHandler _Nonnull)completionHandler __attribute__((swift_name("load(with:completionHandler:)")));
 		[Static]
-		[Export ("loadWithAdResponseString:completionHandler:")]
-		void LoadWithAdResponseString (string adResponseString, GADRewardedInterstitialAdLoadCompletionHandler completionHandler);
+		[Export("loadWithAdResponseString:completionHandler:")]
+		void LoadWithAdResponseString(string adResponseString, GADRewardedInterstitialAdLoadCompletionHandler completionHandler);
 
-		// -(BOOL)canPresentFromRootViewController:(UIViewController * _Nullable)rootViewController error:(NSError * _Nullable * _Nullable)error;
+		// -(BOOL)canPresentFromRootViewController:(UIViewController * _Nullable)rootViewController error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("canPresent(from:)"))) __attribute__((swift_attr("@UIActor")));
 		[Export("canPresentFromRootViewController:error:")]
-		bool CanPresentFromRootViewController([NullAllowed] UIViewController rootViewController,
-			[NullAllowed] out NSError error);
+		bool CanPresentFromRootViewController([NullAllowed] UIViewController rootViewController, [NullAllowed] out NSError error);
 
-		// -(void)presentFromRootViewController:(UIViewController * _Nullable)viewController userDidEarnRewardHandler:(GADUserDidEarnRewardHandler _Nonnull)userDidEarnRewardHandler;
+		// -(void)presentFromRootViewController:(UIViewController * _Nullable)viewController userDidEarnRewardHandler:(GADUserDidEarnRewardHandler _Nonnull)userDidEarnRewardHandler __attribute__((swift_name("present(from:userDidEarnRewardHandler:)"))) __attribute__((swift_attr("@UIActor")));
 		[Export("presentFromRootViewController:userDidEarnRewardHandler:")]
-		void PresentFromRootViewController([NullAllowed] UIViewController viewController,
-			GADUserDidEarnRewardHandler userDidEarnRewardHandler);
-	}
-
-	// @interface GADSearchBannerView : GADBannerView
-	[BaseType(typeof(GADBannerView))]
-	interface GADSearchBannerView
-	{
+		void PresentFromRootViewController([NullAllowed] UIViewController viewController, GADUserDidEarnRewardHandler userDidEarnRewardHandler);
 	}
 
 	// @protocol GADVideoControllerDelegate <NSObject>
@@ -2264,15 +2061,15 @@ namespace Maui.MobileAds
 	[BaseType(typeof(GADAdLoaderOptions))]
 	interface GADVideoOptions
 	{
-		// @property (assign, nonatomic) BOOL startMuted;
+		// @property (assign, nonatomic) BOOL startMuted __attribute__((swift_name("shouldStartMuted")));
 		[Export("startMuted")]
 		bool StartMuted { get; set; }
 
-		// @property (assign, nonatomic) BOOL customControlsRequested;
+		// @property (assign, nonatomic) BOOL customControlsRequested __attribute__((swift_name("areCustomControlsRequested")));
 		[Export("customControlsRequested")]
 		bool CustomControlsRequested { get; set; }
 
-		// @property (assign, nonatomic) BOOL clickToExpandRequested;
+		// @property (assign, nonatomic) BOOL clickToExpandRequested __attribute__((swift_name("isClickToExpandRequested")));
 		[Export("clickToExpandRequested")]
 		bool ClickToExpandRequested { get; set; }
 	}
@@ -2285,7 +2082,7 @@ namespace Maui.MobileAds
 		// @required -(NSArray<NSValue *> * _Nonnull)validBannerSizesForAdLoader:(GADAdLoader * _Nonnull)adLoader;
 		[Abstract]
 		[Export("validBannerSizesForAdLoader:")]
-		NSValue[] ValidBannerSizes(GADAdLoader adLoader);
+		NSValue[] ValidBannerSizesForAdLoader(GADAdLoader adLoader);
 
 		// @required -(void)adLoader:(GADAdLoader * _Nonnull)adLoader didReceiveGAMBannerView:(GAMBannerView * _Nonnull)bannerView;
 		[Abstract]
@@ -2334,9 +2131,9 @@ namespace Maui.MobileAds
 	[BaseType(typeof(GADAdLoaderOptions))]
 	interface GAMBannerViewOptions
 	{
-		// @property (assign, nonatomic) BOOL enableManualImpressions;
-		[Export("enableManualImpressions")]
-		bool EnableManualImpressions { get; set; }
+		// @property (getter = isManualImpressionEnabled, assign, nonatomic) BOOL manualImpressionEnabled;
+		[Export("manualImpressionEnabled")]
+		bool ManualImpressionEnabled { [Bind("isManualImpressionEnabled")] get; set; }
 	}
 
 	// @interface GAMRequest : GADRequest
@@ -2352,9 +2149,8 @@ namespace Maui.MobileAds
 		string[] CategoryExclusions { get; set; }
 	}
 
-	// typedef void (^GAMInterstitialAdLoadCompletionHandler)(GAMInterstitialAd * _Nullable, NSError * _Nullable);
-	delegate void GAMInterstitialAdLoadCompletionHandler([NullAllowed] GAMInterstitialAd arg0,
-		[NullAllowed] NSError arg1);
+	// typedef void(^GAMInterstitialAdLoadCompletionHandler)(GAMInterstitialAd * _Nullable, NSError * _Nullable);
+	delegate void GAMInterstitialAdLoadCompletionHandler([NullAllowed] GAMInterstitialAd arg0, [NullAllowed] NSError arg1);
 
 	// @interface GAMInterstitialAd : GADInterstitialAd
 	[BaseType(typeof(GADInterstitialAd))]
@@ -2368,11 +2164,10 @@ namespace Maui.MobileAds
 		[NullAllowed, Export("appEventDelegate", ArgumentSemantic.Weak)]
 		NSObject WeakAppEventDelegate { get; set; }
 
-		// +(void)loadWithAdManagerAdUnitID:(NSString * _Nonnull)adUnitID request:(GAMRequest * _Nullable)request completionHandler:(GAMInterstitialAdLoadCompletionHandler _Nonnull)completionHandler;
+		// +(void)loadWithAdManagerAdUnitID:(NSString * _Nonnull)adUnitID request:(GAMRequest * _Nullable)request completionHandler:(GAMInterstitialAdLoadCompletionHandler _Nonnull)completionHandler __attribute__((swift_name("load(with:request:completionHandler:)")));
 		[Static]
 		[Export("loadWithAdManagerAdUnitID:request:completionHandler:")]
-		void Load(string adUnitID, [NullAllowed] GAMRequest request,
-			GAMInterstitialAdLoadCompletionHandler completionHandler);
+		void LoadWithAdManagerAdUnitID(string adUnitID, [NullAllowed] GAMRequest request, GAMInterstitialAdLoadCompletionHandler completionHandler);
 	}
 
 	// @protocol GADMediationAdRequest <NSObject>
@@ -2386,6 +2181,7 @@ namespace Maui.MobileAds
   be used.
 */
 	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMediationAdRequest
 	{
 		// @required -(NSString * _Nullable)publisherId;
@@ -2411,7 +2207,7 @@ namespace Maui.MobileAds
 		// @required -(NSNumber * _Nullable)childDirectedTreatment;
 		[Abstract]
 		[NullAllowed, Export("childDirectedTreatment")]
-		NSNumber ChildDirectedTreatment { get; }
+ 		NSNumber ChildDirectedTreatment { get; }
 
 		// @required -(GADMaxAdContentRating _Nullable)maxAdContentRating;
 		[Abstract]
@@ -2429,10 +2225,6 @@ namespace Maui.MobileAds
 		NSObject[] UserKeywords { get; }
 	}
 
-	interface IGADMAdNetworkAdapter
-	{
-	}
-
 	// @protocol GADMAdNetworkConnector <GADMediationAdRequest>
 	/*
   Check whether adding [Model] to this declaration is appropriate.
@@ -2444,6 +2236,7 @@ namespace Maui.MobileAds
   be used.
 */
 	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMAdNetworkConnector : GADMediationAdRequest
 	{
 		// @required -(UIViewController *)viewControllerForPresentingModalView;
@@ -2464,78 +2257,77 @@ namespace Maui.MobileAds
 		// @required -(void)adapter:(id<GADMAdNetworkAdapter>)adapter didFailAd:(NSError *)error;
 		[Abstract]
 		[Export("adapter:didFailAd:")]
-		void AdapterDidFailAd(IGADMAdNetworkAdapter adapter, NSError error);
+		void AdapterDidFailAd(GADMAdNetworkAdapter adapter, NSError error);
 
 		// @required -(void)adapter:(id<GADMAdNetworkAdapter>)adapter didReceiveAdView:(UIView *)view;
 		[Abstract]
 		[Export("adapter:didReceiveAdView:")]
-		void AdapterDidReceiveAdView(IGADMAdNetworkAdapter adapter, UIView view);
+		void AdapterDidReceiveAdView(GADMAdNetworkAdapter adapter, UIView view);
 
 		// @required -(void)adapterDidReceiveInterstitial:(id<GADMAdNetworkAdapter>)adapter;
 		[Abstract]
 		[Export("adapterDidReceiveInterstitial:")]
-		void AdapterDidReceiveInterstitial(IGADMAdNetworkAdapter adapter);
+		void AdapterDidReceiveInterstitial(GADMAdNetworkAdapter adapter);
 
 		// @required -(void)adapter:(id<GADMAdNetworkAdapter>)adapter didReceiveMediatedUnifiedNativeAd:(id<GADMediatedUnifiedNativeAd>)mediatedUnifiedNativeAd;
 		[Abstract]
 		[Export("adapter:didReceiveMediatedUnifiedNativeAd:")]
-		void AdapterDidReceiveMediatedUnifiedNativeAd(IGADMAdNetworkAdapter adapter,
-			GADMediatedUnifiedNativeAd mediatedUnifiedNativeAd);
+		void AdapterDidReceiveMediatedUnifiedNativeAd(GADMAdNetworkAdapter adapter, GADMediatedUnifiedNativeAd mediatedUnifiedNativeAd);
 
 		// @required -(void)adapterDidGetAdClick:(id<GADMAdNetworkAdapter>)adapter;
 		[Abstract]
 		[Export("adapterDidGetAdClick:")]
-		void AdapterDidGetAdClick(IGADMAdNetworkAdapter adapter);
+		void AdapterDidGetAdClick(GADMAdNetworkAdapter adapter);
 
 		// @required -(void)adapterWillPresentFullScreenModal:(id<GADMAdNetworkAdapter>)adapter;
 		[Abstract]
 		[Export("adapterWillPresentFullScreenModal:")]
-		void AdapterWillPresentFullScreenModal(IGADMAdNetworkAdapter adapter);
+		void AdapterWillPresentFullScreenModal(GADMAdNetworkAdapter adapter);
 
 		// @required -(void)adapterWillDismissFullScreenModal:(id<GADMAdNetworkAdapter>)adapter;
 		[Abstract]
 		[Export("adapterWillDismissFullScreenModal:")]
-		void AdapterWillDismissFullScreenModal(IGADMAdNetworkAdapter adapter);
+		void AdapterWillDismissFullScreenModal(GADMAdNetworkAdapter adapter);
 
 		// @required -(void)adapterDidDismissFullScreenModal:(id<GADMAdNetworkAdapter>)adapter;
 		[Abstract]
 		[Export("adapterDidDismissFullScreenModal:")]
-		void AdapterDidDismissFullScreenModal(IGADMAdNetworkAdapter adapter);
+		void AdapterDidDismissFullScreenModal(GADMAdNetworkAdapter adapter);
 
 		// @required -(void)adapterWillPresentInterstitial:(id<GADMAdNetworkAdapter>)adapter;
 		[Abstract]
 		[Export("adapterWillPresentInterstitial:")]
-		void AdapterWillPresentInterstitial(IGADMAdNetworkAdapter adapter);
+		void AdapterWillPresentInterstitial(GADMAdNetworkAdapter adapter);
 
 		// @required -(void)adapterWillDismissInterstitial:(id<GADMAdNetworkAdapter>)adapter;
 		[Abstract]
 		[Export("adapterWillDismissInterstitial:")]
-		void AdapterWillDismissInterstitial(IGADMAdNetworkAdapter adapter);
+		void AdapterWillDismissInterstitial(GADMAdNetworkAdapter adapter);
 
 		// @required -(void)adapterDidDismissInterstitial:(id<GADMAdNetworkAdapter>)adapter;
 		[Abstract]
 		[Export("adapterDidDismissInterstitial:")]
-		void AdapterDidDismissInterstitial(IGADMAdNetworkAdapter adapter);
+		void AdapterDidDismissInterstitial(GADMAdNetworkAdapter adapter);
 
 		// @required -(void)adapter:(id<GADMAdNetworkAdapter>)adapter didReceiveInterstitial:(NSObject *)interstitial __attribute__((deprecated("Use -adapterDidReceiveInterstitial:.")));
 		[Abstract]
 		[Export("adapter:didReceiveInterstitial:")]
-		void AdapterDidReceiveInterstitial(IGADMAdNetworkAdapter adapter, NSObject interstitial);
+		void AdapterDidReceiveInterstitial(GADMAdNetworkAdapter adapter, NSObject interstitial);
 
 		// @required -(void)adapter:(id<GADMAdNetworkAdapter>)adapter clickDidOccurInBanner:(UIView *)view __attribute__((deprecated("Use -adapterDidGetAdClick:.")));
 		[Abstract]
 		[Export("adapter:clickDidOccurInBanner:")]
-		void AdapterClickDidOccurInBanner(IGADMAdNetworkAdapter adapter, UIView view);
+		void AdapterClickDidOccurInBanner(GADMAdNetworkAdapter adapter, UIView view);
 
 		// @required -(void)adapter:(id<GADMAdNetworkAdapter>)adapter didFailInterstitial:(NSError *)error __attribute__((deprecated("Use -adapter:didFailAd:")));
 		[Abstract]
 		[Export("adapter:didFailInterstitial:")]
-		void AdapterDidFailInterstitial(IGADMAdNetworkAdapter adapter, NSError error);
+		void AdapterDidFailInterstitial(GADMAdNetworkAdapter adapter, NSError error);
 
 		// @required -(void)adapterWillLeaveApplication:(id<GADMAdNetworkAdapter>)adapter __attribute__((deprecated("Deprecated. No replacement.")));
 		[Abstract]
 		[Export("adapterWillLeaveApplication:")]
-		void AdapterWillLeaveApplication(IGADMAdNetworkAdapter adapter);
+		void AdapterWillLeaveApplication(GADMAdNetworkAdapter adapter);
 	}
 
 	// @protocol GADMAdNetworkAdapter <NSObject>
@@ -2549,6 +2341,7 @@ namespace Maui.MobileAds
   be used.
 */
 	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMAdNetworkAdapter
 	{
 		// @required +(NSString *)adapterVersion;
@@ -2561,15 +2354,10 @@ namespace Maui.MobileAds
 		[Export("networkExtrasClass")]
 		GADAdNetworkExtras NetworkExtrasClass { get; }
 
-		// @required -(instancetype)initWithGADMAdNetworkConnector:(id<GADMAdNetworkConnector>)connector;
-		//[Abstract]
-		//[Export("initWithGADMAdNetworkConnector:")]
-		//NativeHandle Constructor(GADMAdNetworkConnector connector);
-
-		// @required -(void)getBannerWithSize:(GADAdSize)adSize;
+		// @required -(void)getBannerWithSize:(GADAdSize)adSize __attribute__((swift_name("getBanner(with:)")));
 		[Abstract]
 		[Export("getBannerWithSize:")]
-		void GetBanner(GADAdSize adSize);
+		void GetBannerWithSize(GADAdSize adSize);
 
 		// @required -(void)getInterstitial;
 		[Abstract]
@@ -2581,14 +2369,14 @@ namespace Maui.MobileAds
 		[Export("stopBeingDelegate")]
 		void StopBeingDelegate();
 
-		// @required -(void)presentInterstitialFromRootViewController:(UIViewController *)rootViewController;
+		// @required -(void)presentInterstitialFromRootViewController:(UIViewController *)rootViewController __attribute__((swift_name("presentInterstitial(from:)")));
 		[Abstract]
 		[Export("presentInterstitialFromRootViewController:")]
 		void PresentInterstitialFromRootViewController(UIViewController rootViewController);
 
-		// @optional -(void)getNativeAdWithAdTypes:(NSArray<GADAdLoaderAdType> *)adTypes options:(NSArray<GADAdLoaderOptions *> *)options;
+		// @optional -(void)getNativeAdWithAdTypes:(NSArray<GADAdLoaderAdType> *)adTypes options:(NSArray<GADAdLoaderOptions *> *)options __attribute__((swift_name("getNativeAd(with:options:)")));
 		[Export("getNativeAdWithAdTypes:options:")]
-		void GetNativeAd(string[] adTypes, GADAdLoaderOptions[] options);
+		void GetNativeAdWithAdTypes(string[] adTypes, GADAdLoaderOptions[] options);
 
 		// @optional -(BOOL)handlesUserClicks;
 		[Export("handlesUserClicks")]
@@ -2600,7 +2388,7 @@ namespace Maui.MobileAds
 
 		// @optional -(void)changeAdSizeTo:(GADAdSize)adSize;
 		[Export("changeAdSizeTo:")]
-		void ChangeAdSize(GADAdSize adSize);
+		void ChangeAdSizeTo(GADAdSize adSize);
 	}
 
 	// @interface GADMediatedUnifiedNativeAdNotificationSource : NSObject
@@ -2659,6 +2447,7 @@ namespace Maui.MobileAds
   be used.
 */
 	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMediationAd
 	{
 	}
@@ -2710,7 +2499,8 @@ namespace Maui.MobileAds
 		GADAdNetworkExtras Extras { get; }
 
 		// @property (readonly, nonatomic) BOOL isTestRequest;
-		[Export("isTestRequest")] bool IsTestRequest { get; }
+		[Export("isTestRequest")]
+		bool IsTestRequest { get; }
 	}
 
 	// @protocol GADMediationAdEventDelegate <NSObject>
@@ -2736,7 +2526,7 @@ namespace Maui.MobileAds
 		// @required -(void)didFailToPresentWithError:(NSError * _Nonnull)error;
 		[Abstract]
 		[Export("didFailToPresentWithError:")]
-		void DidFailToPresent(NSError error);
+		void DidFailToPresentWithError(NSError error);
 
 		// @required -(void)willDismissFullScreenView;
 		[Abstract]
@@ -2794,10 +2584,6 @@ namespace Maui.MobileAds
 		void DidUnmuteVideo();
 	}
 
-	interface IGADMediationRewardedAdEventDelegate
-	{
-	}
-
 	// @protocol GADMediationRewardedAdEventDelegate <GADMediationAdEventDelegate>
 	[Protocol, Model]
 	[BaseType(typeof(NSObject))]
@@ -2837,9 +2623,10 @@ namespace Maui.MobileAds
   be used.
 */
 	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMediationAppOpenAd : GADMediationAd
 	{
-		// @required -(void)presentFromViewController:(UIViewController * _Nonnull)viewController;
+		// @required -(void)presentFromViewController:(UIViewController * _Nonnull)viewController __attribute__((swift_name("present(from:)")));
 		[Abstract]
 		[Export("presentFromViewController:")]
 		void PresentFromViewController(UIViewController viewController);
@@ -2862,16 +2649,17 @@ namespace Maui.MobileAds
   be used.
 */
 	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMediationBannerAd : GADMediationAd
 	{
 		// @required @property (readonly, nonatomic) UIView * _Nonnull view;
 		[Abstract]
-		[Export("view")] 
+		[Export("view")]
 		UIView View { get; }
 
 		// @optional -(void)changeAdSizeTo:(GADAdSize)adSize;
 		[Export("changeAdSizeTo:")]
-		void ChangeAdSize(GADAdSize adSize);
+		void ChangeAdSizeTo(GADAdSize adSize);
 	}
 
 	// @protocol GADMediationInterscrollerAd <GADMediationBannerAd>
@@ -2885,6 +2673,7 @@ namespace Maui.MobileAds
   be used.
 */
 	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMediationInterscrollerAd : GADMediationBannerAd
 	{
 		// @required @property (assign, nonatomic) BOOL delegateInterscrollerEffect;
@@ -2913,9 +2702,10 @@ namespace Maui.MobileAds
   be used.
 */
 	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMediationInterstitialAd : GADMediationAd
 	{
-		// @required -(void)presentFromViewController:(UIViewController * _Nonnull)viewController;
+		// @required -(void)presentFromViewController:(UIViewController * _Nonnull)viewController __attribute__((swift_name("present(from:)")));
 		[Abstract]
 		[Export("presentFromViewController:")]
 		void PresentFromViewController(UIViewController viewController);
@@ -2938,6 +2728,7 @@ namespace Maui.MobileAds
   be used.
 */
 	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMediationNativeAd : GADMediationAd, GADMediatedUnifiedNativeAd
 	{
 		// @optional -(BOOL)handlesUserClicks;
@@ -2958,7 +2749,6 @@ namespace Maui.MobileAds
 		GADAdLoaderOptions[] Options { get; }
 	}
 
-
 	// @protocol GADMediationRewardedAd <GADMediationAd>
 	/*
   Check whether adding [Model] to this declaration is appropriate.
@@ -2970,16 +2760,13 @@ namespace Maui.MobileAds
   be used.
 */
 	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMediationRewardedAd : GADMediationAd
 	{
-		// @required -(void)presentFromViewController:(UIViewController * _Nonnull)viewController;
+		// @required -(void)presentFromViewController:(UIViewController * _Nonnull)viewController __attribute__((swift_name("present(from:)")));
 		[Abstract]
 		[Export("presentFromViewController:")]
 		void PresentFromViewController(UIViewController viewController);
-	}
-
-	interface IGADMediationAd
-	{
 	}
 
 	// @interface GADMediationRewardedAdConfiguration : GADMediationAdConfiguration
@@ -2988,53 +2775,26 @@ namespace Maui.MobileAds
 	{
 	}
 
-	interface IGADMediationBannerAd
-	{
-	}
+	// typedef id<GADMediationBannerAdEventDelegate> _Nullable(^GADMediationBannerLoadCompletionHandler)(id<GADMediationBannerAd> _Nullable, NSError * _Nullable);
+	delegate GADMediationBannerAdEventDelegate GADMediationBannerLoadCompletionHandler([NullAllowed] GADMediationBannerAd arg0, [NullAllowed] NSError arg1);
 
-	interface IGADMediationInterscrollerAd
-	{
-	}
+	// typedef id<GADMediationBannerAdEventDelegate> _Nullable(^GADMediationInterscrollerAdLoadCompletionHandler)(id<GADMediationInterscrollerAd> _Nullable, NSError * _Nullable);
+	delegate GADMediationBannerAdEventDelegate GADMediationInterscrollerAdLoadCompletionHandler([NullAllowed] GADMediationInterscrollerAd arg0, [NullAllowed] NSError arg1);
 
-	interface IGADMediationInterstitialAd
-	{
-	}
+	// typedef id<GADMediationInterstitialAdEventDelegate> _Nullable(^GADMediationInterstitialLoadCompletionHandler)(id<GADMediationInterstitialAd> _Nullable, NSError * _Nullable);
+	delegate GADMediationInterstitialAdEventDelegate GADMediationInterstitialLoadCompletionHandler([NullAllowed] GADMediationInterstitialAd arg0, [NullAllowed] NSError arg1);
 
-	interface IGADMediationNativeAd
-	{
-	}
+	// typedef id<GADMediationNativeAdEventDelegate> _Nullable(^GADMediationNativeLoadCompletionHandler)(id<GADMediationNativeAd> _Nullable, NSError * _Nullable);
+	delegate GADMediationNativeAdEventDelegate GADMediationNativeLoadCompletionHandler([NullAllowed] GADMediationNativeAd arg0, [NullAllowed] NSError arg1);
 
-	interface IGADMediationRewardedAd
-	{
-	}
+	// typedef id<GADMediationRewardedAdEventDelegate> _Nullable(^GADMediationRewardedLoadCompletionHandler)(id<GADMediationRewardedAd> _Nullable, NSError * _Nullable);
+	delegate GADMediationRewardedAdEventDelegate GADMediationRewardedLoadCompletionHandler([NullAllowed] GADMediationRewardedAd arg0, [NullAllowed] NSError arg1);
 
-	interface IGADMediationAppOpenAd
-	{
-	}
+	// typedef id<GADMediationAppOpenAdEventDelegate> _Nullable(^GADMediationAppOpenLoadCompletionHandler)(id<GADMediationAppOpenAd> _Nullable, NSError * _Nullable);
+	delegate GADMediationAppOpenAdEventDelegate GADMediationAppOpenLoadCompletionHandler([NullAllowed] GADMediationAppOpenAd arg0, [NullAllowed] NSError arg1);
 
-	interface IGADMediationAppOpenAdEventDelegate
-	{}
-
-// typedef id<GADMediationBannerAdEventDelegate> _Nullable (^GADMediationBannerLoadCompletionHandler)(id<GADMediationBannerAd> _Nullable, NSError * _Nullable);
-	delegate GADMediationBannerAdEventDelegate GADMediationBannerLoadCompletionHandler ([NullAllowed] IGADMediationBannerAd ad, [NullAllowed] NSError err);
-
-	// typedef id<GADMediationBannerAdEventDelegate> _Nullable (^GADMediationInterscrollerAdLoadCompletionHandler)(id<GADMediationInterscrollerAd> _Nullable, NSError * _Nullable);
-	delegate GADMediationBannerAdEventDelegate GADMediationInterscrollerAdLoadCompletionHandler ([NullAllowed] IGADMediationInterscrollerAd ad, [NullAllowed] NSError err);
-
-	// typedef id<GADMediationInterstitialAdEventDelegate> _Nullable (^GADMediationInterstitialLoadCompletionHandler)(id<GADMediationInterstitialAd> _Nullable, NSError * _Nullable);
-	delegate GADMediationInterstitialAdEventDelegate GADMediationInterstitialLoadCompletionHandler ([NullAllowed] IGADMediationInterstitialAd ad, [NullAllowed] NSError err);
-
-	// typedef id<GADMediationNativeAdEventDelegate> _Nullable (^GADMediationNativeLoadCompletionHandler)(id<GADMediationNativeAd> _Nullable, NSError * _Nullable);
-	delegate GADMediationNativeAdEventDelegate GADMediationNativeLoadCompletionHandler ([NullAllowed] IGADMediationNativeAd ad, [NullAllowed] NSError err);
-
-	// typedef id<GADMediationRewardedAdEventDelegate> _Nullable (^GADMediationRewardedLoadCompletionHandler)(id<GADMediationRewardedAd> _Nullable, NSError * _Nullable);
-	delegate GADMediationRewardedAdEventDelegate GADMediationRewardedLoadCompletionHandler ([NullAllowed] IGADMediationRewardedAd ad, [NullAllowed] NSError err);
-
-	// typedef id<GADMediationAppOpenAdEventDelegate> _Nullable (^GADMediationAppOpenLoadCompletionHandler)(id<GADMediationAppOpenAd> _Nullable, NSError * _Nullable);
-	delegate GADMediationAppOpenAdEventDelegate GADMediationAppOpenLoadCompletionHandler ([NullAllowed] IGADMediationAppOpenAd ad, [NullAllowed] NSError err);
-
-	// typedef void (^GADMediationAdapterSetUpCompletionBlock)(NSError * _Nullable);
-	delegate void GADMediationAdapterSetUpCompletionBlock ([NullAllowed] NSError err);
+	// typedef void(^GADMediationAdapterSetUpCompletionBlock)(NSError * _Nullable);
+	delegate void GADMediationAdapterSetUpCompletionBlock([NullAllowed] NSError arg0);
 
 	// @protocol GADMediationAdapter <NSObject>
 	/*
@@ -3045,98 +2805,88 @@ namespace Maui.MobileAds
   the generated interface. If consumers are not supposed to implement this
   protocol, then [Model] is redundant and will generate code that will never
   be used.
-*/[Protocol]
+*/
+	[Protocol]
+	[BaseType(typeof(NSObject))]
 	interface GADMediationAdapter
 	{
 		// @required +(GADVersionNumber)adapterVersion;
 		[Static, Abstract]
-		[Export ("adapterVersion")]
+		[Export("adapterVersion")]
 		GADVersionNumber AdapterVersion { get; }
 
 		// @required +(GADVersionNumber)adSDKVersion;
 		[Static, Abstract]
-		[Export ("adSDKVersion")]
+		[Export("adSDKVersion")]
 		GADVersionNumber AdSDKVersion { get; }
 
 		// @required +(Class<GADAdNetworkExtras> _Nullable)networkExtrasClass;
 		[Static, Abstract]
-		[NullAllowed, Export ("networkExtrasClass")]
+		[NullAllowed, Export("networkExtrasClass")]
 		GADAdNetworkExtras NetworkExtrasClass { get; }
 
-		// @optional +(void)setUpWithConfiguration:(GADMediationServerConfiguration * _Nonnull)configuration completionHandler:(GADMediationAdapterSetUpCompletionBlock _Nonnull)completionHandler;
+		// @optional +(void)setUpWithConfiguration:(GADMediationServerConfiguration * _Nonnull)configuration completionHandler:(GADMediationAdapterSetUpCompletionBlock _Nonnull)completionHandler __attribute__((swift_name("setUp(with:completionHandler:)")));
 		[Static]
-		[Export ("setUpWithConfiguration:completionHandler:")]
-		void SetUp (GADMediationServerConfiguration configuration, GADMediationAdapterSetUpCompletionBlock completionHandler);
+		[Export("setUpWithConfiguration:completionHandler:")]
+		void SetUpWithConfiguration(GADMediationServerConfiguration configuration, GADMediationAdapterSetUpCompletionBlock completionHandler);
 
 		// @optional -(void)loadBannerForAdConfiguration:(GADMediationBannerAdConfiguration * _Nonnull)adConfiguration completionHandler:(GADMediationBannerLoadCompletionHandler _Nonnull)completionHandler;
-		[Export ("loadBannerForAdConfiguration:completionHandler:")]
-		void LoadBanner (GADMediationBannerAdConfiguration adConfiguration, GADMediationBannerLoadCompletionHandler completionHandler);
+		[Export("loadBannerForAdConfiguration:completionHandler:")]
+		void LoadBannerForAdConfiguration(GADMediationBannerAdConfiguration adConfiguration, GADMediationBannerLoadCompletionHandler completionHandler);
 
 		// @optional -(void)loadInterstitialForAdConfiguration:(GADMediationInterstitialAdConfiguration * _Nonnull)adConfiguration completionHandler:(GADMediationInterstitialLoadCompletionHandler _Nonnull)completionHandler;
-		[Export ("loadInterstitialForAdConfiguration:completionHandler:")]
-		void LoadInterstitialForAdConfiguration (GADMediationInterstitialAdConfiguration adConfiguration, GADMediationInterstitialLoadCompletionHandler completionHandler);
+		[Export("loadInterstitialForAdConfiguration:completionHandler:")]
+		void LoadInterstitialForAdConfiguration(GADMediationInterstitialAdConfiguration adConfiguration, GADMediationInterstitialLoadCompletionHandler completionHandler);
 
 		// @optional -(void)loadNativeAdForAdConfiguration:(GADMediationNativeAdConfiguration * _Nonnull)adConfiguration completionHandler:(GADMediationNativeLoadCompletionHandler _Nonnull)completionHandler;
-		[Export ("loadNativeAdForAdConfiguration:completionHandler:")]
-		void LoadNativeAd (GADMediationNativeAdConfiguration adConfiguration, GADMediationNativeLoadCompletionHandler completionHandler);
+		[Export("loadNativeAdForAdConfiguration:completionHandler:")]
+		void LoadNativeAdForAdConfiguration(GADMediationNativeAdConfiguration adConfiguration, GADMediationNativeLoadCompletionHandler completionHandler);
 
 		// @optional -(void)loadRewardedAdForAdConfiguration:(GADMediationRewardedAdConfiguration * _Nonnull)adConfiguration completionHandler:(GADMediationRewardedLoadCompletionHandler _Nonnull)completionHandler;
-		[Export ("loadRewardedAdForAdConfiguration:completionHandler:")]
-		void LoadRewardedAd (GADMediationRewardedAdConfiguration adConfiguration, GADMediationRewardedLoadCompletionHandler completionHandler);
+		[Export("loadRewardedAdForAdConfiguration:completionHandler:")]
+		void LoadRewardedAdForAdConfiguration(GADMediationRewardedAdConfiguration adConfiguration, GADMediationRewardedLoadCompletionHandler completionHandler);
 
 		// @optional -(void)loadRewardedInterstitialAdForAdConfiguration:(GADMediationRewardedAdConfiguration * _Nonnull)adConfiguration completionHandler:(GADMediationRewardedLoadCompletionHandler _Nonnull)completionHandler;
-		[Export ("loadRewardedInterstitialAdForAdConfiguration:completionHandler:")]
-		void LoadRewardedInterstitialAd (GADMediationRewardedAdConfiguration adConfiguration, GADMediationRewardedLoadCompletionHandler completionHandler);
+		[Export("loadRewardedInterstitialAdForAdConfiguration:completionHandler:")]
+		void LoadRewardedInterstitialAdForAdConfiguration(GADMediationRewardedAdConfiguration adConfiguration, GADMediationRewardedLoadCompletionHandler completionHandler);
 
 		// @optional -(void)loadAppOpenAdForAdConfiguration:(GADMediationAppOpenAdConfiguration * _Nonnull)adConfiguration completionHandler:(GADMediationAppOpenLoadCompletionHandler _Nonnull)completionHandler;
-		[Export ("loadAppOpenAdForAdConfiguration:completionHandler:")]
-		void LoadAppOpenAd (GADMediationAppOpenAdConfiguration adConfiguration, GADMediationAppOpenLoadCompletionHandler completionHandler);
+		[Export("loadAppOpenAdForAdConfiguration:completionHandler:")]
+		void LoadAppOpenAdForAdConfiguration(GADMediationAppOpenAdConfiguration adConfiguration, GADMediationAppOpenLoadCompletionHandler completionHandler);
 
 		// @optional -(void)loadInterscrollerAdForAdConfiguration:(GADMediationBannerAdConfiguration * _Nonnull)adConfiguration completionHandler:(GADMediationInterscrollerAdLoadCompletionHandler _Nonnull)completionHandler __attribute__((deprecated("Interscroller mediation is no longer supported. This API will be removed in a future release.")));
-		[Export ("loadInterscrollerAdForAdConfiguration:completionHandler:")]
-		void LoadInterscrollerAdForAdConfiguration (GADMediationBannerAdConfiguration adConfiguration, GADMediationInterscrollerAdLoadCompletionHandler completionHandler);
+		[Export("loadInterscrollerAdForAdConfiguration:completionHandler:")]
+		void LoadInterscrollerAdForAdConfiguration(GADMediationBannerAdConfiguration adConfiguration, GADMediationInterscrollerAdLoadCompletionHandler completionHandler);
 	}
-	
-	interface IGADMediationAppOpenLoadCompletionHandler {}
-
-	// // @interface AdString (GADRequest)
-	// [Category]
-	// [BaseType (typeof(GADRequest))]
-	// interface GADRequest_AdString
-	// {
-	// 	// @property (copy, nonatomic) NSString * _Nullable adString;
-	// 	[NullAllowed, Export ("adString")]
-	// 	string AdString { get; set; }
-	// }
 
 	// @interface GADRTBMediationSignalsConfiguration : NSObject
-	[BaseType (typeof(NSObject))]
+	[BaseType(typeof(NSObject))]
 	interface GADRTBMediationSignalsConfiguration
 	{
 		// @property (readonly, nonatomic) NSArray<GADMediationCredentials *> * _Nonnull credentials;
-		[Export ("credentials")]
+		[Export("credentials")]
 		GADMediationCredentials[] Credentials { get; }
 	}
 
 	// @interface GADRTBRequestParameters : NSObject
-	[BaseType (typeof(NSObject))]
+	[BaseType(typeof(NSObject))]
 	interface GADRTBRequestParameters
 	{
 		// @property (readonly, nonatomic) GADRTBMediationSignalsConfiguration * _Nonnull configuration;
-		[Export ("configuration")]
+		[Export("configuration")]
 		GADRTBMediationSignalsConfiguration Configuration { get; }
 
 		// @property (readonly, nonatomic) id<GADAdNetworkExtras> _Nullable extras;
-		[NullAllowed, Export ("extras")]
+		[NullAllowed, Export("extras")]
 		GADAdNetworkExtras Extras { get; }
 
 		// @property (readonly, nonatomic) GADAdSize adSize;
-		[Export ("adSize")]
+		[Export("adSize")]
 		GADAdSize AdSize { get; }
 	}
 
-	// typedef void (^GADRTBSignalCompletionHandler)(NSString * _Nullable, NSError * _Nullable);
-	delegate void GADRTBSignalCompletionHandler ([NullAllowed] string str, [NullAllowed] NSError err);
+	// typedef void(^GADRTBSignalCompletionHandler)(NSString * _Nullable, NSError * _Nullable);
+	delegate void GADRTBSignalCompletionHandler([NullAllowed] string arg0, [NullAllowed] NSError arg1);
 
 	// @protocol GADRTBAdapter <GADMediationAdapter>
 	/*
@@ -3147,130 +2897,131 @@ namespace Maui.MobileAds
   the generated interface. If consumers are not supposed to implement this
   protocol, then [Model] is redundant and will generate code that will never
   be used.
-*/[Protocol]
+*/
+	[Protocol]
 	interface GADRTBAdapter : GADMediationAdapter
 	{
 		// @required -(void)collectSignalsForRequestParameters:(GADRTBRequestParameters * _Nonnull)params completionHandler:(GADRTBSignalCompletionHandler _Nonnull)completionHandler;
 		[Abstract]
-		[Export ("collectSignalsForRequestParameters:completionHandler:")]
-		void CompletionHandler (GADRTBRequestParameters @params, GADRTBSignalCompletionHandler completionHandler);
+		[Export("collectSignalsForRequestParameters:completionHandler:")]
+		void CompletionHandler(GADRTBRequestParameters @params, GADRTBSignalCompletionHandler completionHandler);
 	}
 
-// @interface GADAppOpenSignalRequest : GADSignalRequest
-	[BaseType (typeof(GADSignalRequest))]
+	// @interface GADAppOpenSignalRequest : GADSignalRequest
+	[BaseType(typeof(GADSignalRequest))]
 	interface GADAppOpenSignalRequest
 	{
 		// -(instancetype _Nonnull)initWithSignalType:(NSString * _Nonnull)signalType;
-		[Export ("initWithSignalType:")]
-		NativeHandle Constructor (string signalType);
+		[Export("initWithSignalType:")]
+		NativeHandle Constructor(string signalType);
 	}
 
 	// @interface GADBannerSignalRequest : GADSignalRequest
-	[BaseType (typeof(GADSignalRequest))]
+	[BaseType(typeof(GADSignalRequest))]
 	interface GADBannerSignalRequest
 	{
-		// @property (nonatomic) BOOL enableManualImpressions;
-		[Export ("enableManualImpressions")]
-		bool EnableManualImpressions { get; set; }
+		// @property (getter = isManualImpressionEnabled, nonatomic) BOOL manualImpressionEnabled;
+		[Export("manualImpressionEnabled")]
+		bool ManualImpressionEnabled { [Bind("isManualImpressionEnabled")] get; set; }
 
 		// @property (assign, nonatomic) GADAdSize adSize;
-		[Export ("adSize", ArgumentSemantic.Assign)]
+		[Export("adSize", ArgumentSemantic.Assign)]
 		GADAdSize AdSize { get; set; }
 
 		// @property (copy, nonatomic) NSArray<NSValue *> * _Nullable adSizes;
-		[NullAllowed, Export ("adSizes", ArgumentSemantic.Copy)]
+		[NullAllowed, Export("adSizes", ArgumentSemantic.Copy)]
 		NSValue[] AdSizes { get; set; }
 
 		// @property (copy, nonatomic) GADVideoOptions * _Nullable videoOptions;
-		[NullAllowed, Export ("videoOptions", ArgumentSemantic.Copy)]
+		[NullAllowed, Export("videoOptions", ArgumentSemantic.Copy)]
 		GADVideoOptions VideoOptions { get; set; }
 
 		// -(instancetype _Nonnull)initWithSignalType:(NSString * _Nonnull)signalType;
-		[Export ("initWithSignalType:")]
-		NativeHandle Constructor (string signalType);
+		[Export("initWithSignalType:")]
+		NativeHandle Constructor(string signalType);
 	}
 
 	// @interface GADInterstitialSignalRequest : GADSignalRequest
-	[BaseType (typeof(GADSignalRequest))]
+	[BaseType(typeof(GADSignalRequest))]
 	interface GADInterstitialSignalRequest
 	{
 		// -(instancetype _Nonnull)initWithSignalType:(NSString * _Nonnull)signalType;
-		[Export ("initWithSignalType:")]
-		NativeHandle Constructor (string signalType);
+		[Export("initWithSignalType:")]
+		NativeHandle Constructor(string signalType);
 	}
 
 	// @interface GADNativeSignalRequest : GADSignalRequest
-	[BaseType (typeof(GADSignalRequest))]
+	[BaseType(typeof(GADSignalRequest))]
 	interface GADNativeSignalRequest
 	{
 		// @property (nonatomic) NSInteger numberOfAds;
-		[Export ("numberOfAds")]
+		[Export("numberOfAds")]
 		nint NumberOfAds { get; set; }
 
-		// @property (assign, nonatomic) BOOL disableImageLoading;
-		[Export ("disableImageLoading")]
-		bool DisableImageLoading { get; set; }
+		// @property (getter = isImageLoadingDisabled, assign, nonatomic) BOOL disableImageLoading __attribute__((swift_name("isImageLoadingDisabled")));
+		[Export("disableImageLoading")]
+		bool DisableImageLoading { [Bind("isImageLoadingDisabled")] get; set; }
 
 		// @property (assign, nonatomic) BOOL shouldRequestMultipleImages;
-		[Export ("shouldRequestMultipleImages")]
+		[Export("shouldRequestMultipleImages")]
 		bool ShouldRequestMultipleImages { get; set; }
 
 		// @property (assign, nonatomic) GADMediaAspectRatio mediaAspectRatio;
-		[Export ("mediaAspectRatio", ArgumentSemantic.Assign)]
+		[Export("mediaAspectRatio", ArgumentSemantic.Assign)]
 		GADMediaAspectRatio MediaAspectRatio { get; set; }
 
 		// @property (assign, nonatomic) GADAdChoicesPosition preferredAdChoicesPosition;
-		[Export ("preferredAdChoicesPosition", ArgumentSemantic.Assign)]
+		[Export("preferredAdChoicesPosition", ArgumentSemantic.Assign)]
 		GADAdChoicesPosition PreferredAdChoicesPosition { get; set; }
 
-		// @property (assign, nonatomic) BOOL customMuteThisAdRequested;
-		[Export ("customMuteThisAdRequested")]
-		bool CustomMuteThisAdRequested { get; set; }
+		// @property (getter = isCustomMuteThisAdRequested, assign, nonatomic) BOOL customMuteThisAdRequested __attribute__((swift_name("isCustomMuteThisAdRequested")));
+		[Export("customMuteThisAdRequested")]
+		bool CustomMuteThisAdRequested { [Bind("isCustomMuteThisAdRequested")] get; set; }
 
 		// @property (assign, nonatomic) BOOL enableManualImpressions;
-		[Export ("enableManualImpressions")]
+		[Export("enableManualImpressions")]
 		bool EnableManualImpressions { get; set; }
 
 		// -(void)enableSwipeGestureDirection:(UISwipeGestureRecognizerDirection)direction tapsAllowed:(BOOL)tapsAllowed;
-		[Export ("enableSwipeGestureDirection:tapsAllowed:")]
-		void EnableSwipeGestureDirection (UISwipeGestureRecognizerDirection direction, bool tapsAllowed);
+		[Export("enableSwipeGestureDirection:tapsAllowed:")]
+		void EnableSwipeGestureDirection(UISwipeGestureRecognizerDirection direction, bool tapsAllowed);
 
 		// @property (copy, nonatomic) GADVideoOptions * _Nullable videoOptions;
-		[NullAllowed, Export ("videoOptions", ArgumentSemantic.Copy)]
+		[NullAllowed, Export("videoOptions", ArgumentSemantic.Copy)]
 		GADVideoOptions VideoOptions { get; set; }
 
 		// @property (copy, nonatomic) NSArray<NSValue *> * _Nullable adSizes;
-		[NullAllowed, Export ("adSizes", ArgumentSemantic.Copy)]
+		[NullAllowed, Export("adSizes", ArgumentSemantic.Copy)]
 		NSValue[] AdSizes { get; set; }
 
 		// @property (copy, nonatomic) NSSet<GADAdLoaderAdType> * _Nullable adLoaderAdTypes;
-		[NullAllowed, Export ("adLoaderAdTypes", ArgumentSemantic.Copy)]
+		[NullAllowed, Export("adLoaderAdTypes", ArgumentSemantic.Copy)]
 		NSSet<NSString> AdLoaderAdTypes { get; set; }
 
 		// @property (copy, nonatomic) NSArray<NSString *> * _Nullable customNativeAdFormatIDs;
-		[NullAllowed, Export ("customNativeAdFormatIDs", ArgumentSemantic.Copy)]
+		[NullAllowed, Export("customNativeAdFormatIDs", ArgumentSemantic.Copy)]
 		string[] CustomNativeAdFormatIDs { get; set; }
 
 		// -(instancetype _Nonnull)initWithSignalType:(NSString * _Nonnull)signalType;
-		[Export ("initWithSignalType:")]
-		NativeHandle Constructor (string signalType);
+		[Export("initWithSignalType:")]
+		NativeHandle Constructor(string signalType);
 	}
 
 	// @interface GADRewardedInterstitialSignalRequest : GADSignalRequest
-	[BaseType (typeof(GADSignalRequest))]
+	[BaseType(typeof(GADSignalRequest))]
 	interface GADRewardedInterstitialSignalRequest
 	{
 		// -(instancetype _Nonnull)initWithSignalType:(NSString * _Nonnull)signalType;
-		[Export ("initWithSignalType:")]
-		NativeHandle Constructor (string signalType);
+		[Export("initWithSignalType:")]
+		NativeHandle Constructor(string signalType);
 	}
 
 	// @interface GADRewardedSignalRequest : GADSignalRequest
-	[BaseType (typeof(GADSignalRequest))]
+	[BaseType(typeof(GADSignalRequest))]
 	interface GADRewardedSignalRequest
 	{
 		// -(instancetype _Nonnull)initWithSignalType:(NSString * _Nonnull)signalType;
-		[Export ("initWithSignalType:")]
-		NativeHandle Constructor (string signalType);
+		[Export("initWithSignalType:")]
+		NativeHandle Constructor(string signalType);
 	}
 }
