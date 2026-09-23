@@ -28,6 +28,10 @@ namespace Maui.UserMessagingPlatform
 		// @property (copy, nonatomic) UMPDebugSettings * _Nullable debugSettings;
 		[NullAllowed, Export("debugSettings", ArgumentSemantic.Copy)]
 		UMPDebugSettings DebugSettings { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable consentSyncID;
+		[NullAllowed, Export("consentSyncID")]
+		string ConsentSyncID { get; set; }
 	}
 
 	[Static]

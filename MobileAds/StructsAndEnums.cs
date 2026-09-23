@@ -34,8 +34,10 @@ namespace Maui.MobileAds
 		public nuint flags;
 	}
 
-	public static class AdSize
+	public static partial class AdSize
 	{
+		// The GADAdSize constants (Banner, LargeBanner, ...) are in Additions.cs.
+
 		// extern GADAdSize GADPortraitInlineAdaptiveBannerAdSizeWithWidth (CGFloat width) __attribute__((swift_name("portraitInlineAdaptiveBanner(width:)")));
 		[DllImport ("__Internal")]
 		public static extern GADAdSize GADPortraitInlineAdaptiveBannerAdSizeWithWidth (nfloat width);
@@ -52,15 +54,30 @@ namespace Maui.MobileAds
 		[DllImport ("__Internal")]
 		public static extern GADAdSize GADInlineAdaptiveBannerAdSizeWithWidthAndMaxHeight (nfloat width, nfloat maxHeight);
 
-		// extern GADAdSize GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth (CGFloat width) __attribute__((swift_name("portraitAnchoredAdaptiveBanner(width:)")));
+		// extern GADAdSize GADLargePortraitAnchoredAdaptiveBannerAdSizeWithWidth (CGFloat width) __attribute__((swift_name("largePortraitAnchoredAdaptiveBanner(width:)")));
+		[DllImport ("__Internal")]
+		public static extern GADAdSize GADLargePortraitAnchoredAdaptiveBannerAdSizeWithWidth (nfloat width);
+
+		// extern GADAdSize GADLargeLandscapeAnchoredAdaptiveBannerAdSizeWithWidth (CGFloat width) __attribute__((swift_name("largeLandscapeAnchoredAdaptiveBanner(width:)")));
+		[DllImport ("__Internal")]
+		public static extern GADAdSize GADLargeLandscapeAnchoredAdaptiveBannerAdSizeWithWidth (nfloat width);
+
+		// extern GADAdSize GADLargeAnchoredAdaptiveBannerAdSizeWithWidth (CGFloat width) __attribute__((swift_name("largeAnchoredAdaptiveBanner(width:)")));
+		[DllImport ("__Internal")]
+		public static extern GADAdSize GADLargeAnchoredAdaptiveBannerAdSizeWithWidth (nfloat width);
+
+		// extern GADAdSize GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth (CGFloat width) __attribute__((deprecated("Use GADLargePortraitAnchoredAdaptiveBannerAdSizeWithWidth instead.")));
+		[Obsolete ("Use GADLargePortraitAnchoredAdaptiveBannerAdSizeWithWidth instead.")]
 		[DllImport ("__Internal")]
 		public static extern GADAdSize GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth (nfloat width);
 
-		// extern GADAdSize GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth (CGFloat width) __attribute__((swift_name("landscapeAnchoredAdaptiveBanner(width:)")));
+		// extern GADAdSize GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth (CGFloat width) __attribute__((deprecated("Use GADLargeLandscapeAnchoredAdaptiveBannerAdSizeWithWidth instead.")));
+		[Obsolete ("Use GADLargeLandscapeAnchoredAdaptiveBannerAdSizeWithWidth instead.")]
 		[DllImport ("__Internal")]
 		public static extern GADAdSize GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth (nfloat width);
 
-		// extern GADAdSize GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth (CGFloat width) __attribute__((swift_name("currentOrientationAnchoredAdaptiveBanner(width:)")));
+		// extern GADAdSize GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth (CGFloat width) __attribute__((deprecated("Use GADLargeAnchoredAdaptiveBannerAdSizeWithWidth instead.")));
+		[Obsolete ("Use GADLargeAnchoredAdaptiveBannerAdSizeWithWidth instead.")]
 		[DllImport ("__Internal")]
 		public static extern GADAdSize GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth (nfloat width);
 
@@ -78,39 +95,69 @@ namespace Maui.MobileAds
 
 		// extern BOOL GADAdSizeEqualToSize (GADAdSize size1, GADAdSize size2) __attribute__((swift_name("isAdSizeEqualToSize(size1:size2:)")));
 		[DllImport ("__Internal")]
+		[return: MarshalAs (UnmanagedType.I1)]
 		public static extern bool GADAdSizeEqualToSize (GADAdSize size1, GADAdSize size2);
 
 		// extern BOOL IsGADAdSizeValid (GADAdSize size) __attribute__((swift_name("isAdSizeValid(size:)")));
 		[DllImport ("__Internal")]
+		[return: MarshalAs (UnmanagedType.I1)]
 		public static extern bool IsGADAdSizeValid (GADAdSize size);
 
 		// extern BOOL GADAdSizeIsFluid (GADAdSize size) __attribute__((swift_name("isAdSizeFluid(size:)")));
 		[DllImport ("__Internal")]
+		[return: MarshalAs (UnmanagedType.I1)]
 		public static extern bool GADAdSizeIsFluid (GADAdSize size);
 
 		// extern CGSize CGSizeFromGADAdSize (GADAdSize size) __attribute__((swift_name("cgSize(for:)")));
 		[DllImport ("__Internal")]
 		public static extern CGSize CGSizeFromGADAdSize (GADAdSize size);
 
+		// Objective-C objects can't be marshaled by P/Invoke directly, so the functions below
+		// take/return native handles and are wrapped with the managed types.
+
 		// extern NSString * _Nonnull NSStringFromGADAdSize (GADAdSize size) __attribute__((swift_name("string(for:)")));
-		[DllImport ("__Internal")]
-		public static extern NSString NSStringFromGADAdSize (GADAdSize size);
+		[DllImport ("__Internal", EntryPoint = "NSStringFromGADAdSize")]
+		static extern IntPtr _NSStringFromGADAdSize (GADAdSize size);
+
+		public static NSString NSStringFromGADAdSize (GADAdSize size)
+			=> Runtime.GetNSObject<NSString> (_NSStringFromGADAdSize (size))!;
 
 		// extern NSValue * _Nonnull NSValueFromGADAdSize (GADAdSize size) __attribute__((swift_name("nsValue(for:)")));
-		[DllImport ("__Internal")]
-		public static extern NSValue NSValueFromGADAdSize (GADAdSize size);
+		[DllImport ("__Internal", EntryPoint = "NSValueFromGADAdSize")]
+		static extern IntPtr _NSValueFromGADAdSize (GADAdSize size);
+
+		public static NSValue NSValueFromGADAdSize (GADAdSize size)
+			=> Runtime.GetNSObject<NSValue> (_NSValueFromGADAdSize (size))!;
 
 		// extern GADAdSize GADAdSizeFromNSValue (NSValue * _Nonnull value) __attribute__((swift_name("adSizeFor(nsValue:)")));
-		[DllImport ("__Internal")]
-		public static extern GADAdSize GADAdSizeFromNSValue (NSValue value);
+		[DllImport ("__Internal", EntryPoint = "GADAdSizeFromNSValue")]
+		static extern GADAdSize _GADAdSizeFromNSValue (IntPtr value);
+
+		public static GADAdSize GADAdSizeFromNSValue (NSValue value)
+		{
+			ArgumentNullException.ThrowIfNull (value);
+			var result = _GADAdSizeFromNSValue (value.Handle);
+			GC.KeepAlive (value);
+			return result;
+		}
 
 		// extern NSString * _Nonnull GADGetStringFromVersionNumber (GADVersionNumber version) __attribute__((swift_name("string(for:)")));
-		[DllImport ("__Internal")]
-		public static extern NSString GADGetStringFromVersionNumber (GADVersionNumber version);
+		[DllImport ("__Internal", EntryPoint = "GADGetStringFromVersionNumber")]
+		static extern IntPtr _GADGetStringFromVersionNumber (GADVersionNumber version);
+
+		public static NSString GADGetStringFromVersionNumber (GADVersionNumber version)
+			=> Runtime.GetNSObject<NSString> (_GADGetStringFromVersionNumber (version))!;
 
 		// extern GADAdSize GADClosestValidSizeForAdSizes (GADAdSize original, NSArray<NSValue *> * _Nonnull possibleAdSizes) __attribute__((swift_name("closestValidSizeForAdSizes(original:possibleAdSizes:)")));
-		[DllImport ("__Internal")]
-		public static extern GADAdSize GADClosestValidSizeForAdSizes (GADAdSize original, NSValue[] possibleAdSizes);
+		[DllImport ("__Internal", EntryPoint = "GADClosestValidSizeForAdSizes")]
+		static extern GADAdSize _GADClosestValidSizeForAdSizes (GADAdSize original, IntPtr possibleAdSizes);
+
+		public static GADAdSize GADClosestValidSizeForAdSizes (GADAdSize original, NSValue[] possibleAdSizes)
+		{
+			ArgumentNullException.ThrowIfNull (possibleAdSizes);
+			using var array = NSArray.FromNSObjects (possibleAdSizes);
+			return _GADClosestValidSizeForAdSizes (original, array.Handle);
+		}
 	}
 
 	[Native]
@@ -147,6 +194,14 @@ namespace Maui.MobileAds
 		Disabled = 2
 	}
 
+	[Native]
+	public enum GADAgeRestrictedTreatment : long
+	{
+		Unspecified = 0,
+		Child = 1,
+		Teen = 2
+	}
+
 	[StructLayout (LayoutKind.Sequential)]
 	public struct GADVersionNumber
 	{
@@ -164,6 +219,7 @@ namespace Maui.MobileAds
 		NoFill = 1,
 		NetworkError = 2,
 		ServerError = 3,
+		[Obsolete ("Deprecated. No replacement.")]
 		OSVersionTooLow = 4,
 		Timeout = 5,
 		MediationDataError = 7,

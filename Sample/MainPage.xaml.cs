@@ -3,10 +3,23 @@
 public partial class MainPage : ContentPage
 {
     int count = 0;
+#if IOS
+    readonly Platforms.iOS.InterstitialAdService _interstitialAdService = new();
+#endif
 
     public MainPage()
     {
         InitializeComponent();
+#if IOS
+        _interstitialAdService.Load();
+#endif
+    }
+
+    private void OnInterstitialClicked(object sender, EventArgs e)
+    {
+#if IOS
+        _interstitialAdService.Show();
+#endif
     }
 
     private void OnCounterClicked(object sender, EventArgs e)

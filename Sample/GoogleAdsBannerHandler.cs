@@ -28,13 +28,18 @@ public partial class GoogleAdsBannerHandler : ViewHandler<IGoogleAdsBannerView, 
     protected override NativeBannerAdView CreatePlatformView()
     {
 #if IOS
-        var viewWidth = UIKit.UIApplication.SharedApplication.KeyWindow.Frame.Width;
-        
+        // KeyWindow is deprecated and is still null while the scene is connecting (when the first page is
+        // created), so use the window scene bounds instead.
+        var windowScene = UIApplication.SharedApplication.ConnectedScenes.OfType<UIWindowScene>().FirstOrDefault();
+        var viewWidth = windowScene is null ? 320
+            : OperatingSystem.IsIOSVersionAtLeast(26) ? windowScene.EffectiveGeometry.CoordinateSpace.Bounds.Width
+            : windowScene.CoordinateSpace.Bounds.Width;
+
         // Here the current interface orientation is used. Use
-        // GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth or
-        // GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth if you prefer to load an ad of a
+        // GADLargeLandscapeAnchoredAdaptiveBannerAdSizeWithWidth or
+        // GADLargePortraitAnchoredAdaptiveBannerAdSizeWithWidth if you prefer to load an ad of a
         // particular orientation,
-        var adaptiveSize = AdSize.GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth);
+        var adaptiveSize = AdSize.GADLargeAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth);
         var bannerView = new GADBannerView(adaptiveSize);
         bannerView.Delegate = new BannerDg();
         return bannerView;
