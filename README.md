@@ -1,5 +1,7 @@
 # Maui.MobileAds iOS
-iOS Bindings for Google's Mobile Ads SDK to use in .NET MAUI
+iOS Bindings for Google's Mobile Ads SDK to use in .NET MAUI.
+
+Forked from [Redth/Maui.GoogleMobileAds.iOS](https://github.com/Redth/Maui.GoogleMobileAds.iOS).
 
 ## Building
 
