@@ -13,6 +13,7 @@ namespace Maui.MobileAds
 	interface IGADFullScreenPresentingAd { }
 	interface IGADAdMetadataProvider { }
 	interface IGADAdNetworkExtras { }
+	interface IGADPreloadDelegate { }
 
 	// Symbols whose types [Field] can't bind (a C string and GADAdSize structs). Declaring them here makes
 	// the native linker keep and export them; the public API reads them by address in Additions.cs.
@@ -1425,6 +1426,106 @@ namespace Maui.MobileAds
 		// -(void)presentFromRootViewController:(UIViewController * _Nullable)rootViewController __attribute__((swift_name("present(from:)"))) __attribute__((swift_attr("@UIActor")));
 		[Export("presentFromRootViewController:")]
 		void PresentFromRootViewController([NullAllowed] UIViewController rootViewController);
+	}
+
+	// The preloader types below were written by hand from the framework's PrivateHeaders/*_Beta.h. They aren't in the
+	// umbrella header, so generating the bindings with sharpie drops them. Being beta, they may change between SDK versions.
+
+	// @protocol GADPreloadDelegate <NSObject>
+	[Protocol, Model]
+	[BaseType(typeof(NSObject))]
+	interface GADPreloadDelegate
+	{
+		// @required -(void)adAvailableForPreloadID:(NSString * _Nonnull)preloadID responseInfo:(GADResponseInfo * _Nonnull)responseInfo;
+		[Abstract]
+		[Export("adAvailableForPreloadID:responseInfo:")]
+		void AdAvailableForPreloadID(string preloadID, GADResponseInfo responseInfo);
+
+		// @required -(void)adsExhaustedForPreloadID:(NSString * _Nonnull)preloadID;
+		[Abstract]
+		[Export("adsExhaustedForPreloadID:")]
+		void AdsExhaustedForPreloadID(string preloadID);
+
+		// @required -(void)adFailedToPreloadForPreloadID:(NSString * _Nonnull)preloadID error:(NSError * _Nonnull)error;
+		[Abstract]
+		[Export("adFailedToPreloadForPreloadID:error:")]
+		void AdFailedToPreloadForPreloadID(string preloadID, NSError error);
+	}
+
+	// @interface GADPreloadConfigurationV2 : NSObject <NSCopying>
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface GADPreloadConfigurationV2 : INSCopying
+	{
+		// @property (readonly, nonatomic) NSString * _Nonnull adUnitID;
+		[Export("adUnitID")]
+		string AdUnitID { get; }
+
+		// @property (readonly, nonatomic) GADRequest * _Nonnull request;
+		[Export("request")]
+		GADRequest Request { get; }
+
+		// @property (readwrite, nonatomic) NSUInteger bufferSize;
+		[Export("bufferSize")]
+		nuint BufferSize { get; set; }
+
+		// -(instancetype _Nonnull)initWithAdUnitID:(NSString * _Nonnull)adUnitID request:(GADRequest * _Nonnull)request;
+		[Export("initWithAdUnitID:request:")]
+		NativeHandle Constructor(string adUnitID, GADRequest request);
+
+		// -(instancetype _Nonnull)initWithAdUnitID:(NSString * _Nonnull)adUnitID;
+		[Export("initWithAdUnitID:")]
+		NativeHandle Constructor(string adUnitID);
+	}
+
+	// @interface GADInterstitialAdPreloader : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface GADInterstitialAdPreloader
+	{
+		// @property (class, readonly, nonatomic) GADInterstitialAdPreloader * _Nonnull sharedInstance;
+		[Static]
+		[Export("sharedInstance")]
+		GADInterstitialAdPreloader SharedInstance { get; }
+
+		// -(BOOL)preloadForPreloadID:(NSString * _Nonnull)preloadID configuration:(GADPreloadConfigurationV2 * _Nonnull)configuration delegate:(id<GADPreloadDelegate> _Nullable)delegate;
+		[Export("preloadForPreloadID:configuration:delegate:")]
+		bool PreloadForPreloadID(string preloadID, GADPreloadConfigurationV2 configuration, [NullAllowed] IGADPreloadDelegate @delegate);
+
+		// -(BOOL)isAdAvailableWithPreloadID:(NSString * _Nonnull)preloadID;
+		[Export("isAdAvailableWithPreloadID:")]
+		bool IsAdAvailableWithPreloadID(string preloadID);
+
+		// -(GADInterstitialAd * _Nullable)adWithPreloadID:(NSString * _Nonnull)preloadID;
+		[Export("adWithPreloadID:")]
+		[return: NullAllowed]
+		GADInterstitialAd AdWithPreloadID(string preloadID);
+
+		// -(GADResponseInfo * _Nullable)adResponseInfoWithPreloadID:(NSString * _Nonnull)preloadID;
+		[Export("adResponseInfoWithPreloadID:")]
+		[return: NullAllowed]
+		GADResponseInfo AdResponseInfoWithPreloadID(string preloadID);
+
+		// -(NSUInteger)numberOfAdsAvailableWithPreloadID:(NSString * _Nonnull)preloadID;
+		[Export("numberOfAdsAvailableWithPreloadID:")]
+		nuint NumberOfAdsAvailableWithPreloadID(string preloadID);
+
+		// -(void)stopPreloadingAndRemoveAdsForPreloadID:(NSString * _Nonnull)preloadID;
+		[Export("stopPreloadingAndRemoveAdsForPreloadID:")]
+		void StopPreloadingAndRemoveAdsForPreloadID(string preloadID);
+
+		// -(void)stopPreloadingAndRemoveAllAds;
+		[Export("stopPreloadingAndRemoveAllAds")]
+		void StopPreloadingAndRemoveAllAds();
+
+		// -(GADPreloadConfigurationV2 * _Nullable)configurationWithPreloadID:(NSString * _Nonnull)preloadID;
+		[Export("configurationWithPreloadID:")]
+		[return: NullAllowed]
+		GADPreloadConfigurationV2 ConfigurationWithPreloadID(string preloadID);
+
+		// -(NSDictionary<NSString *,GADPreloadConfigurationV2 *> * _Nonnull)configurations;
+		[Export("configurations")]
+		NSDictionary<NSString, GADPreloadConfigurationV2> Configurations { get; }
 	}
 
 	// @interface GADRequestConfiguration : NSObject
