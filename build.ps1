@@ -1,5 +1,5 @@
 param (
-	[String]$MobileAdsVersion = '13.10.0',
+	[String]$MobileAdsVersion = '13.12.0',
 	[String]$UserMessagingPlatformVersion = '3.1.0',
 	[String]$BuildPath = '.build/',
 	[Bool]$BuildNuGet = $true,
@@ -9,7 +9,7 @@ param (
 )
 
 Function DownloadGoogleMobileAdsSdks(
-	[String]$MobileAdsVersion = '13.10.0',
+	[String]$MobileAdsVersion = '13.12.0',
 	[String]$UserMessagingPlatformVersion = '3.1.0',
 	[String]$DownloadPath = '.build/'
 ){

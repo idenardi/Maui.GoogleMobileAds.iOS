@@ -439,6 +439,10 @@ namespace Maui.MobileAds
 	[BaseType(typeof(NSObject))]
 	interface GADFullScreenContentDelegate
 	{
+		// @optional -(void)ad:(id<GADFullScreenPresentingAd> _Nonnull)ad didRecordPaidEventWithAdValue:(GADAdValue * _Nonnull)value __attribute__((swift_name("ad(_:didRecordPaidEventWith:)"))) __attribute__((swift_attr("@UIActor")));
+		[Export("ad:didRecordPaidEventWithAdValue:")]
+		void AdDidRecordPaidEvent(IGADFullScreenPresentingAd ad, GADAdValue value);
+
 		// @optional -(void)adDidRecordImpression:(id<GADFullScreenPresentingAd> _Nonnull)ad __attribute__((swift_attr("@UIActor")));
 		[Export("adDidRecordImpression:")]
 		void AdDidRecordImpression(IGADFullScreenPresentingAd ad);
@@ -624,6 +628,10 @@ namespace Maui.MobileAds
 	[BaseType(typeof(NSObject))]
 	interface GADBannerViewDelegate
 	{
+		// @optional -(void)bannerView:(GADBannerView * _Nonnull)bannerView didRecordPaidEventWithAdValue:(GADAdValue * _Nonnull)value __attribute__((swift_name("bannerView(_:didRecordPaidEventWith:)"))) __attribute__((swift_attr("@UIActor")));
+		[Export("bannerView:didRecordPaidEventWithAdValue:")]
+		void BannerViewDidRecordPaidEvent(GADBannerView bannerView, GADAdValue value);
+
 		// @optional -(void)bannerViewDidReceiveAd:(GADBannerView * _Nonnull)bannerView __attribute__((swift_attr("@UIActor")));
 		[Export("bannerViewDidReceiveAd:")]
 		void BannerViewDidReceiveAd(GADBannerView bannerView);
@@ -1532,6 +1540,10 @@ namespace Maui.MobileAds
 	[BaseType(typeof(NSObject))]
 	interface GADRequestConfiguration
 	{
+		// @property (nonatomic) BOOL coarseLocationCollectionEnabled;
+		[Export("coarseLocationCollectionEnabled")]
+		bool CoarseLocationCollectionEnabled { get; set; }
+
 		// @property (copy, nonatomic) GADMaxAdContentRating _Nullable maxAdContentRating;
 		[NullAllowed, Export("maxAdContentRating")]
 		string MaxAdContentRating { get; set; }
@@ -1723,6 +1735,10 @@ namespace Maui.MobileAds
 	[BaseType(typeof(NSObject))]
 	interface GADNativeAdDelegate
 	{
+		// @optional -(void)nativeAd:(GADNativeAd * _Nonnull)nativeAd didRecordPaidEventWithAdValue:(GADAdValue * _Nonnull)value __attribute__((swift_name("nativeAd(_:didRecordPaidEventWith:)"))) __attribute__((swift_attr("@UIActor")));
+		[Export("nativeAd:didRecordPaidEventWithAdValue:")]
+		void NativeAdDidRecordPaidEvent(GADNativeAd nativeAd, GADAdValue value);
+
 		// @optional -(void)nativeAdDidRecordImpression:(GADNativeAd * _Nonnull)nativeAd;
 		[Export("nativeAdDidRecordImpression:")]
 		void NativeAdDidRecordImpression(GADNativeAd nativeAd);
