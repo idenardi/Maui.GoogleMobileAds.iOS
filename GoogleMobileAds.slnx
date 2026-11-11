@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="MobileAds/MobileAds.csproj" />
+  <Project Path="Sample/Sample.csproj" />
+  <Project Path="UserMessagingPlatform/UserMessagingPlatform.csproj" />
+</Solution>

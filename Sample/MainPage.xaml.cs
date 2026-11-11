@@ -15,14 +15,14 @@ public partial class MainPage : ContentPage
 #endif
     }
 
-    private void OnInterstitialClicked(object sender, EventArgs e)
+    private void OnInterstitialClicked(object? sender, EventArgs e)
     {
 #if IOS
         _interstitialAdService.Show();
 #endif
     }
 
-    private void OnCounterClicked(object sender, EventArgs e)
+    private void OnCounterClicked(object? sender, EventArgs e)
     {
         count++;
 

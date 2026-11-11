@@ -14,7 +14,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    # The .NET 10 iOS workload requires Xcode 26
+    # The .NET 11 iOS workload requires Xcode 27
     - name: Select Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
@@ -23,7 +23,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 10.0.x
+        dotnet-version: 11.0.x
 
     - name: Workloads
       run: |
@@ -57,7 +57,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 10.0.x
+          dotnet-version: 11.0.x
 
       - name: Publish NuGet
         run: |
